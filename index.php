@@ -9,7 +9,7 @@
 
 <body>
   <?php
-  require('./registration/registration_nav.php');
+  require('./registration/registration-nav.php');
   ?>
 </body>
 

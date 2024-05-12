@@ -22,6 +22,7 @@ CREATE TABLE `Account` (
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   contactNumber VARCHAR(50),
+  dateOfBirth DATETIME,
   roleId INT NOT NULL,
   
   PRIMARY KEY (accountId)

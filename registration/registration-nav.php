@@ -7,9 +7,9 @@
   <script>
     function onHandleNavigation(role) {
       if (role === 'company') {
-        window.location.href = './registration/company_reg.php';
+        window.location.href = './registration/company-reg.php';
       } else {
-        window.location.href = './registration/staff_reg.php';
+        window.location.href = './registration/staff-reg.php';
       }
     }
   </script>

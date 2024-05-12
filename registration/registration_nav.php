@@ -17,7 +17,7 @@
 
 <body>
   <h2>You are:</h2>
-  <button onclick="onHandleNavigation('staff');">Stafsssf</button>
+  <button onclick="onHandleNavigation('staff');">Staff</button>
   <button onclick="onHandleNavigation('company');">Company</button>
 </body>
 

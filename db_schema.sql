@@ -18,9 +18,11 @@ CREATE TABLE `Role` (
 CREATE TABLE `Account` (
 	accountId INT NOT NULL AUTO_INCREMENT,
   emailAddress VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   contactNumber VARCHAR(50),
+  dateOfBirth DATETIME,
   roleId INT NOT NULL,
   
   PRIMARY KEY (accountId)
@@ -103,4 +105,6 @@ ADD FOREIGN KEY (accountId) REFERENCES Account(accountId);
 --
 -- MOCK DATA
 --
-
+-- Role
+INSERT INTO `Role`(`roleName`) VALUES('company'), ('staff');
+--

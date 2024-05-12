@@ -103,4 +103,6 @@ ADD FOREIGN KEY (accountId) REFERENCES Account(accountId);
 --
 -- MOCK DATA
 --
-
+-- Role
+INSERT INTO `Role`(`roleName`) VALUES('company'), ('staff');
+--

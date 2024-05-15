@@ -16,6 +16,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 14px;
+  background: #f7f7f7;
   line-height: 1.6;
 }
 
@@ -61,11 +62,63 @@ li {
 .btn:focus {
   box-shadow: none !important;
 }
-.btn:hover {
+
+.btn-main {
+  border-radius: 0;
+  background: none;
+  border: 2px solid #edf5ff;
   color: #1082ce;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.btn-main:active, .btn-main:hover {
+  box-shadow: none !important;
+}
+.btn-main:focus {
+  box-shadow: none !important;
+}
+.btn-main:hover {
+  background: #0c649f;
+  border: 2px solid #0c649f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+  box-shadow: 0px 1px 1px 0px #0c649f !important;
 }
 
-.form-control:focus {
+.btn-main2 {
+  border-radius: 0;
+  border: 2px solid #edf5ff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+  background: #0c649f;
+  color: #fff;
+}
+.btn-main2:active, .btn-main2:hover {
+  box-shadow: none !important;
+}
+.btn-main2:focus {
+  box-shadow: none !important;
+}
+.btn-main2:hover {
+  background: none;
+  color: #1082ce;
+  border: 2px solid #0c649f;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+  box-shadow: 0px 1px 1px 0px #0c649f !important;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0px;
+}
+.form-control:focus,
+.form-select:focus {
   box-shadow: none !important;
 }
 
@@ -498,4 +551,154 @@ li {
   .sign-body .sign-container .container-box .form-box {
     width: 100%;
   }
+}
+
+.event-search {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.event-search .row {
+  padding: 15px 10px 5px 10px;
+  border: 1px solid #ececec;
+  background: #fff;
+  margin: 0;
+}
+.event-search .row .col-12 {
+  margin: 0;
+  padding: 5px;
+}
+.event-search .row .col-12 .input-group .input-group-text {
+  border-radius: 0;
+  color: #0c649f;
+  background-color: #fff;
+}
+.event-search .row .col-12 .btn-main {
+  background: #1082ce;
+  color: #fff;
+  margin-right: 0;
+}
+.event-search .row .col-12 .btn-main:hover {
+  background: #0c649f;
+}
+
+.event .col-12 {
+  margin-bottom: 20px;
+}
+.event .event-list-content {
+  overflow: hidden;
+  padding: 30px;
+  position: relative;
+  border: 1px solid #ececec;
+  transition: all 0.3s ease 0s;
+  margin-bottom: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+@media (max-width: 576px) {
+  .event .event-list-content {
+    padding: 10px;
+  }
+}
+.event .event-list-content:hover {
+  border: 1px solid hwb(213 73% 0%);
+}
+.event .event-list-content h2 {
+  margin-bottom: 20px;
+  color: #1082ce;
+  margin-top: 0px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+  font-size: 25px;
+}
+.event .event-list-content ul li {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.event .event-list-content ul li i {
+  color: #f1481d;
+  margin-right: 5px;
+}
+.event .event-list-content .btn {
+  margin-top: auto !important;
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.event-banner {
+  height: 40vh;
+  background: #1082ce;
+}
+.event-banner iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.event-container {
+  padding-top: 15px;
+  padding-bottom: 25px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.event-container .event-block {
+  margin: 20px 0;
+}
+.event-container .event-block h1 {
+  margin-bottom: 20px;
+  color: #1082ce;
+  margin-top: 0px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+}
+.event-container .apply-block .subtitle,
+.event-container .apply-block h4 {
+  color: #1082ce;
+  margin: 0;
+}
+.event-container .apply-block h4 {
+  color: #0c649f;
+}
+.event-container .apply-block .socials li {
+  margin: 0 7px 0 7px;
+}
+.event-container .apply-block .socials li i {
+  font-size: 18px;
+  color: #f1481d;
+}
+.event-container .apply-block .socials li i:hover {
+  color: #1082ce;
+}
+
+.form-container {
+  background: #fff;
+  border: 2px solid #edf5ff;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 30px;
+}
+.form-container .form-content {
+  margin: 0;
+}
+.form-container .form-content > * {
+  padding-right: 0;
+  padding-left: 0;
+}
+.form-container .form-content .form-floating {
+  margin-bottom: 15px;
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+}
+.form-container .form-content .form-floating label {
+  padding: 1rem 1.25rem;
+  left: 1px;
+}
+.form-container .form-content .btn-main, .form-container .form-content .btn-main2 {
+  padding: 10px 15px;
+  width: -moz-fit-content;
+  width: fit-content;
 }

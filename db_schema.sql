@@ -22,6 +22,7 @@ CREATE TABLE `Account` (
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   contactNumber VARCHAR(50),
+  createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   roleId INT NOT NULL,
   
   PRIMARY KEY (accountId)
@@ -30,7 +31,7 @@ CREATE TABLE `Account` (
 CREATE TABLE `Staff` (
 	staffId INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(255),
-  dateOfBirth DATETIME,
+  dateOfBirth DATE,
   gender VARCHAR(10) ,
   skills VARCHAR(255),
   interests VARCHAR(255),

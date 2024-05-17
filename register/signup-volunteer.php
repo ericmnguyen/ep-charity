@@ -13,9 +13,11 @@ session_start();
 				validateName("#lastName");
 				validateEmail();
 				validatePassword();
+				validateDate("#dob");
 				const isValidForm = validateName("#firstName") &&
 					validateName("#lastName") &&
 					validateEmail() &&
+					validateDate("#dob") &&
 					validatePassword();
 				if (isValidForm) {
 					// TODO: submit form
@@ -39,22 +41,31 @@ session_start();
 	$lastName = $_POST["lastName"];
 	$contactNumber = $_POST["contactNumber"];
 	$dateOfBirth = $_POST["dob"];
-	echo $firstName . $lastName . $emailAddress . $password . $dateOfBirth . "---";
+	// echo $firstName . $lastName . $emailAddress . $password . $dateOfBirth . "---";
+	// echo $_POST['randcheck'] . "---";
+	// echo $_SESSION['rand'];
 	// Register Handling
-	echo $_POST['randcheck'] . "---";
-	echo $_SESSION['rand'];
 	if ($_POST['randcheck'] == $_SESSION['rand']) {
 		// hash password
 		$hashPassword = password_hash($password, PASSWORD_BCRYPT);
 		echo "---hash: " . $hashPassword;
 		// DB Query
-		$register_api = "INSERT INTO ACCOUNT(emailAddress, password, firstName, lastName, contactNumber, roleId)
+		$register_query = "INSERT INTO ACCOUNT(emailAddress, password, firstName, lastName, contactNumber, roleId)
 		VALUES ('" . $emailAddress . "', '" . $hashPassword . "', '" . $firstName . "', '" . $lastName . "', '" . $contactNumber . "', 2)";
-		$regis_response = mysqli_query($mysqli, $register_api);
+		$regis_response = mysqli_query($mysqli, $register_query);
 		if (!$regis_response) {
 			die(mysqli_connect_error());
 		} else {
 			echo "<h3 class='text-success'>Registered successfully.</h3>";
+		}
+
+		// insert more information
+		$insert_staff_query = "INSERT INTO Staff(dateOfBirth, accountId) VALUES ('$dateOfBirth', LAST_INSERT_ID())";
+		$insert_staff_response = mysqli_query($mysqli, $insert_staff_query);
+		if (!$insert_staff_response) {
+			die(mysqli_connect_error());
+		} else {
+			echo "<h3 class='text-success'>Staff added.</h3>";
 		}
 	}
 	mysqli_close($mysqli);
@@ -122,7 +133,7 @@ session_start();
 									</div>
 
 									<div class="col-md-8 m-auto">
-										<input type="submit" id="submitBtn" value="Submit" class="btn btn-primary" />
+										<input type="submit" id="submitBtn" value="Submit" class="btn btn-block login-btn mb-4 mx-auto" />
 									</div>
 
 								</form>
@@ -130,7 +141,7 @@ session_start();
 								<a href="./forgotpassword.php" class="forgot-password-link">Forgot password?</a>
 
 								<p class="already-text">Already have an account?
-									<a href="./signin.php">Sign In</a>
+									<a href="../signin.php">Sign In</a>
 								</p>
 
 								<p class="already-text">Do you want to add your Comapny Events here? <br>

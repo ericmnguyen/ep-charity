@@ -59,3 +59,16 @@ function validatePassword() {
   }
   return passwordValid && rePasswordValid;
 };
+
+function validateDate(id) {
+  let date = $(id).val();
+  if (date.length == "") {
+    $(id + "Check").show();
+    $(id).addClass('error');
+  } else {
+    $(id + "Check").hide();
+    $(id).removeClass('error');
+    return true;
+  }
+  return false;
+}

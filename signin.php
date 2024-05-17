@@ -46,13 +46,13 @@
                                 <a href="./forgotpassword.php" class="forgot-password-link">Forgot password?</a>
 
                                 <p class="already-text">Create an account.
-                                    <a href="./signup-volunteer.php">Sign Up</a>
+                                    <a href="./register/signup-volunteer.php">Sign Up</a>
                                 </p>
 
 
                                 <p class="already-text">Do you want to add your Comapny Events here?
                                     <br>
-                                    <a href="./signup-company.php">Create an Company Account</a>
+                                    <a href="./register/signup-company.php">Create an Company Account</a>
                                 </p>
 
 

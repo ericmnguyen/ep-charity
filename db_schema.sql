@@ -18,11 +18,10 @@ CREATE TABLE `Role` (
 CREATE TABLE `Account` (
 	accountId INT NOT NULL AUTO_INCREMENT,
   emailAddress VARCHAR(50) NOT NULL,
-  password VARCHAR(50) NOT NULL,
+  password VARCHAR(250) NOT NULL,
   firstName VARCHAR(50),
   lastName VARCHAR(50),
   contactNumber VARCHAR(50),
-  dateOfBirth DATETIME,
   roleId INT NOT NULL,
   
   PRIMARY KEY (accountId)
@@ -31,6 +30,7 @@ CREATE TABLE `Account` (
 CREATE TABLE `Staff` (
 	staffId INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(255),
+  dateOfBirth DATETIME,
   gender VARCHAR(10) ,
   skills VARCHAR(255),
   interests VARCHAR(255),

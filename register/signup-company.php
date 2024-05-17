@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <?php include './includes/header.php' ?>
+    <?php include '../includes/header.php' ?>
 </head>
 
 <body>
 
-    <?php include './includes/navbar.php' ?>
+    <?php include '../includes/navbar.php' ?>
 
 
 
@@ -16,10 +16,10 @@
             <div class="container-box">
                 <div class="row">
                     <div class="col-lg-5 bg">
-                        <h6 class="card-title">SIGN UP<br> <span>Social Volunteer</span></h6>
+                        <h6 class="card-title">SIGN UP <br> <span>Social Volunteer</span></h6>
                         </h6>
 
-                        <p> Register for an account with us and become one of our members.
+                        <p> Register for an account with us and become one of our members. 
                             <br><br>
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam, et voluptate quasi enim molestiae, dolorem neque impedit ipsa autem recusandae illo quod consequatur. In voluptate incidunt quibusdam reprehenderit libero quae? <br>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium aut laborum quos cupiditate assumenda animi, tempora illum velit, facere adipisci a aperiam doloribus alias sapiente, sit rem eius? Necessitatibus, labore.
@@ -28,9 +28,7 @@
                     <div class="col-lg-7">
                         <div class="card-box">
                             <div class="card-body">
-                                <h6 class="card-title">Register as a Volunteer</h6>
-
-
+                                <h6 class="card-title">Register as a Comapny</h6>
 
                                 <form action="" class="row no-gutters" style="max-width: 100%;">
 
@@ -76,9 +74,6 @@
                                     <a href="./signin.php">Sign In</a>
                                 </p>
 
-                                <p class="already-text">Do you want to add your Comapny Events here? <br>
-                                    <a href="./signup-company.php">Create an Company Account</a>
-                                </p>
 
                                 <nav class="login-card-footer-nav">
                                     <a href="">Terms of use.</a>

@@ -493,6 +493,7 @@ li {
   border: 1px solid rgb(255, 58, 58);
 }
 .sign-body .sign-container .container-box .card-box .card-body form small {
+  display: none;
   float: left;
   color: rgb(255, 58, 58);
   padding: 0 5px;

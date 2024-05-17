@@ -77,7 +77,7 @@
                 </h3>
                 <ul>
                     <li>
-                        <a href="" title="Log In / Register">
+                        <a href="signin.php" title="Log In / Register">
                             <span>
                                 Log In / Register
                             </span>

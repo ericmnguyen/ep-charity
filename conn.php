@@ -1,14 +1,13 @@
 <?php
-$mysql_localhost='127.0.0.1';
-$mysql_name='22074118';
-$mysql_password='Zuhan@123';
-$mysql_dbname='Zuhan@123';
-$mysqli = mysqli_connect($mysql_localhost, $mysql_name, $mysql_password, $mysql_dbname)
-OR die
-  (mysqli_connect_error());
+$mysql_hostname = '127.0.0.1';
+$mysql_username = 'root';
+$mysql_password = 'root123456';
+$mysql_dbname = 'ep_charity';
+$mysqli = mysqli_connect($mysql_hostname, $mysql_username, $mysql_password, $mysql_dbname)
+  or die(mysqli_connect_error());
 
 # set encoding to match PHP script encoding
-mysqli_set_charset($dbc, 'utf8');
+mysqli_set_charset($mysqli, 'utf8');
 
-// printf("Host information: %s\n", mysqli_get_host_info($dbc));
+// printf("Host information: %s\n", mysqli_get_host_info($mysqli));
 ?>

@@ -3,6 +3,8 @@ Database schema
 
 
 
+Form validation
+https://www.geeksforgeeks.org/form-validation-using-jquery/
 
 
 todo - 

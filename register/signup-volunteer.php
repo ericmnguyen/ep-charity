@@ -98,7 +98,6 @@ session_start();
 						<div class="card-box">
 							<div class="card-body">
 								<h6 class="card-title">Register as a Volunteer</h6>
-								<hr />
 								<form method="post" action="" class="row no-gutters" style="max-width: 100%;">
 									<?php
 									$rand = rand();

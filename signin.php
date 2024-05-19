@@ -59,21 +59,26 @@ session_start();
 				$_SESSION['lastName'] = $user['lastName'];
 				$_SESSION['contactNumber'] = $user['contactNumber'];
 				$_SESSION['roleId'] = $user['roleId'];
+				// TODO: calculate the session timeout
+				$_SESSION['valid'] = true;
+				$_SESSION['timeout'] = time();
 				echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
 				if ($user['roleId'] == 1) {
 					// navigate to company dashboard
-					echo "company";
+					header("Location: ./company-dashboard.php", true, 301);
+					$script = "<script>window.location = 'company-dashboard.php';</script>";
+					echo $script;
+					exit();
 				} else {
 					// navigate to volunteer dashboard
-					echo "volunteer";
 					header("Location: ./dashboard.php", true, 301);
+					$script = "<script>window.location = 'dashboard.php';</script>";
+					echo $script;
 					exit();
 				}
-			} else {
-				echo "<h3 class='text-danger'>Incorrect Password!</h3>";
 			}
 		} else {
-			echo "<h3 class='text-danger'>Invalid.</h3>";
+			echo "<h3 class='text-danger'>Invalid. Please try again.</h3>";
 		}
 	}
 	?>

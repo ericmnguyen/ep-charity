@@ -1,3 +1,13 @@
+<!-- let access if company -->
+<?php
+session_start();
+ob_start();
+if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 2)) {
+    header("Location: /404.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +18,8 @@
 <body>
 
     <?php include '../includes/navbar.php' ?>
+
+
 
 
     <main class="container">

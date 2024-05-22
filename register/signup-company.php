@@ -1,6 +1,13 @@
+<!-- no access if signed in -->
 <?php
 session_start();
+ob_start();
+if (isset($_SESSION['roleId'])) {
+	header("Location: /profile/profile.php");
+	exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

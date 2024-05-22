@@ -1,6 +1,13 @@
+<!-- no access if signed in -->
 <?php
 session_start();
+ob_start();
+if (isset($_SESSION['roleId'])) {
+	header("Location: /profile/profile.php");
+	exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,14 +72,14 @@ session_start();
 				echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
 				if ($user['roleId'] == 1) {
 					// navigate to company dashboard
-					header("Location: ./company-dashboard.php", true, 301);
-					$script = "<script>window.location = 'company-dashboard.php';</script>";
+					header("Location: /dashboard/company-dashboard.php", true, 301);
+					$script = "<script>window.location = '/dashboard/company-dashboard.php';</script>";
 					echo $script;
 					exit();
 				} else {
 					// navigate to volunteer dashboard
-					header("Location: ./dashboard.php", true, 301);
-					$script = "<script>window.location = 'dashboard.php';</script>";
+					header("Location: /dashboard/dashboard.php", true, 301);
+					$script = "<script>window.location = '/dashboard/dashboard.php';</script>";
 					echo $script;
 					exit();
 				}
@@ -100,7 +107,7 @@ session_start();
 							<div class="card-body">
 								<h6 class="card-title">Login</h6>
 								<br>
-								<form method="post" action="" class="row no-gutters" style="max-width: 100%;">
+								<form method="post" action="" id="signInUser" class="row no-gutters" style="max-width: 100%;">
 									<?php
 									$rand = rand();
 									$_SESSION['rand'] = $rand;
@@ -148,7 +155,45 @@ session_start();
 	<?php include './includes/footer.php' ?>
 	<!-- page-specific js -->
 	<script>
-
+		$(document).ready(function() {
+			$("#signInUser").validate({
+				rules: {
+					emailAddress: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true,
+						minlength: 6
+					}
+				},
+				messages: {
+					emailAddress: {
+						required: "Please enter your email address",
+						email: "Please enter a valid email address"
+					},
+					password: {
+						required: "Please provide a password",
+						minlength: "Your password must be at least 6 characters long"
+					}
+				},
+				errorElement: "div",
+				errorPlacement: function(error, element) {
+					error.addClass("invalid-feedback");
+					if (element.prop("type") === "checkbox") {
+						error.insertAfter(element.next("label"));
+					} else {
+						error.insertAfter(element);
+					}
+				},
+				highlight: function(element, errorClass, validClass) {
+					$(element).addClass("is-invalid").removeClass("is-valid");
+				},
+				unhighlight: function(element, errorClass, validClass) {
+					$(element).addClass("is-valid").removeClass("is-invalid");
+				}
+			});
+		});
 	</script>
 
 </body>

@@ -33,7 +33,7 @@
                 </form>
 
                 <div class="user-nav-btn">
-                    <a href="./signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user">
+                    <a href="/page/profile.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user">
                             <span class="bg-success">!</span>
                         </i>
                     </a>
@@ -45,19 +45,22 @@
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./category.php">Events</a>
+                    <a class="nav-link active" href="/page/event-form.php">Events form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./category.php">Calendar</a>
+                    <a class="nav-link" href="/page/event-list.php">Events list</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./category.php">Top Volunteer</a>
+                    <a class="nav-link" href="/page/event-view.php">Events view</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./category.php">Companies</a>
+                    <a class="nav-link" href="/top-volunteer.php">Top Volunteer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./category.php">Account</a>
+                    <a class="nav-link" href="/comapnies.php">Companies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/page/profile.php">Account</a>
                 </li>
             </ul>
 

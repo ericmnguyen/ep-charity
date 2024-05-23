@@ -43,49 +43,52 @@ if (isset($_SESSION['roleId'])) {
 	include '../includes/navbar.php';
 	include '../conn.php';
 
-	$emailAddress = $_POST["emailAddress"];
-	$password = $_POST["password"];
-	$firstName = $_POST["firstName"];
-	$lastName = $_POST["lastName"];
-	$contactNumber = $_POST["contactNumber"];
-	$dateOfBirth = $_POST["dob"];
-	// echo $firstName . $lastName . $emailAddress . $password . $dateOfBirth . "---";
-	// echo $_POST['randcheck'] . "---";
-	// echo $_SESSION['rand'];
-	// Register Handling
-	if ($_POST['randcheck'] == $_SESSION['rand']) {
-		// hash password
-		$hashPassword = password_hash($password, PASSWORD_BCRYPT);
-		// echo "---hash: " . $hashPassword;
-		// DB Query
-		// Check if email already exists
-		$check_email_exist_query = "SELECT * FROM Account WHERE emailAddress='$emailAddress'";
-		$email_exist_response = mysqli_query($mysqli, $check_email_exist_query);
-		if (!$email_exist_response) {
-			die(mysqli_connect_error());
-		} else if (mysqli_num_rows($email_exist_response) > 0) {
-			echo "<h3 class='text-danger'>Email exists. Please use another email.</h3>";
-		} else {
-			$register_query = "INSERT INTO ACCOUNT(emailAddress, password, firstName, lastName, contactNumber, roleId)
-			VALUES ('" . $emailAddress . "', '" . $hashPassword . "', '" . $firstName . "', '" . $lastName . "', '" . $contactNumber . "', 2)";
-			$regis_response = mysqli_query($mysqli, $register_query);
-			if (!$regis_response) {
-				die(mysqli_connect_error());
-			} else {
-				echo "<h3 class='text-success'>Registered successfully.</h3>";
-			}
 
-			// insert more information
-			$insert_staff_query = "INSERT INTO Staff(dateOfBirth, accountId) VALUES ('$dateOfBirth', LAST_INSERT_ID())";
-			$insert_staff_response = mysqli_query($mysqli, $insert_staff_query);
-			if (!$insert_staff_response) {
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$emailAddress = $_POST["emailAddress"];
+		$password = $_POST["password"];
+		$firstName = $_POST["firstName"];
+		$lastName = $_POST["lastName"];
+		$contactNumber = $_POST["contactNumber"];
+		$dateOfBirth = $_POST["dob"];
+		// echo $firstName . $lastName . $emailAddress . $password . $dateOfBirth . "---";
+		// echo $_POST['randcheck'] . "---";
+		// echo $_SESSION['rand'];
+		// Register Handling
+		if ($_POST['randcheck'] == $_SESSION['rand']) {
+			// hash password
+			$hashPassword = password_hash($password, PASSWORD_BCRYPT);
+			// echo "---hash: " . $hashPassword;
+			// DB Query
+			// Check if email already exists
+			$check_email_exist_query = "SELECT * FROM Account WHERE emailAddress='$emailAddress'";
+			$email_exist_response = mysqli_query($mysqli, $check_email_exist_query);
+			if (!$email_exist_response) {
 				die(mysqli_connect_error());
+			} else if (mysqli_num_rows($email_exist_response) > 0) {
+				echo "<h3 class='text-danger'>Email exists. Please use another email.</h3>";
 			} else {
-				echo "<h3 class='text-success'>Staff added.</h3>";
+				$register_query = "INSERT INTO ACCOUNT(emailAddress, password, firstName, lastName, contactNumber, roleId)
+			VALUES ('" . $emailAddress . "', '" . $hashPassword . "', '" . $firstName . "', '" . $lastName . "', '" . $contactNumber . "', 2)";
+				$regis_response = mysqli_query($mysqli, $register_query);
+				if (!$regis_response) {
+					die(mysqli_connect_error());
+				} else {
+					echo "<h3 class='text-success'>Registered successfully.</h3>";
+				}
+
+				// insert more information
+				$insert_staff_query = "INSERT INTO Staff(dateOfBirth, accountId) VALUES ('$dateOfBirth', LAST_INSERT_ID())";
+				$insert_staff_response = mysqli_query($mysqli, $insert_staff_query);
+				if (!$insert_staff_response) {
+					die(mysqli_connect_error());
+				} else {
+					echo "<h3 class='text-success'>Staff added.</h3>";
+				}
 			}
 		}
+		mysqli_close($mysqli);
 	}
-	mysqli_close($mysqli);
 	?>
 
 	<div class="sign-body">
@@ -179,7 +182,7 @@ if (isset($_SESSION['roleId'])) {
 
 
 	<!-- footer -->
-	<?php include './includes/footer.php' ?>
+	<?php include '../includes/footer.php' ?>
 	<!-- page-specific js -->
 	<script>
 

@@ -52,19 +52,43 @@ CREATE TABLE `Company` (
   PRIMARY KEY(companyId)
 );
 
-CREATE TABLE `Event` (
-	eventId INT NOT NULL AUTO_INCREMENT,
-  description VARCHAR(2000),
-  location VARCHAR(255),
-  startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  endDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  volunteerQuantity INT,
-  category VARCHAR(255),
-  eventStatus VARCHAR(20),
+-- CREATE TABLE `Event` (
+-- 	eventId INT NOT NULL AUTO_INCREMENT,
+--   description VARCHAR(2000),
+--   location VARCHAR(255),
+--   startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--   endDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--   volunteerQuantity INT,
+--   category VARCHAR(255),
+--   eventStatus VARCHAR(20),
   
-  PRIMARY KEY(eventId)
+--   PRIMARY KEY(eventId)
+-- );
+
+
+CREATE TABLE `Event` (
+    eventId INT AUTO_INCREMENT,
+    eventName VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    eventType VARCHAR(100) NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
+    venueName VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    locationType ENUM('In-Person', 'Online', 'Hybrid') NOT NULL,
+    maxAttendees INT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    eventStatus ENUM('Published', 'Ongoing', 'Finished') NOT NULL,
+
+    accountId INT NOT NULL, 
+
+    PRIMARY KEY(eventId),
+    FOREIGN KEY(accountId) REFERENCES Account(accountId) 
 );
 
+-- for volunteers and events
 CREATE TABLE `AccountEvent` (
 	eventId INT NOT NULL,
   accountId INT NOT NULL,

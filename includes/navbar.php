@@ -3,6 +3,14 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+
+// // Debugging: Output session information
+// echo "<pre>";
+// var_dump($_SESSION);
+// echo "</pre>";
+
+
 ?>
 
 <div class="topbar">
@@ -16,11 +24,11 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="offer">
             <!-- <a href="./"> New Events</a> -->
 
-            <a href="">1:company and 2:Volunter</a>
+            <a href="">1:company and 2:Volunter................</a> 
 
             <?php
             if (isset($_SESSION['roleId'])) {
-                echo '<a>Welcome, ' . htmlspecialchars($_SESSION['emailAddress']) . ":" . htmlspecialchars($_SESSION['roleId']) . '</a>';
+                echo '<a>Welcome, accountId : ' . htmlspecialchars($_SESSION['accountId']) . ", roleId :" . htmlspecialchars($_SESSION['roleId']) . '</a>';
             } else {
                 echo '<a>Welcome, Guest!</a>';
             }
@@ -66,14 +74,15 @@ if (session_status() == PHP_SESSION_NONE) {
                     } else {
                         echo '<a href="/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';
                     }
-                    ?>
+
+                    // Debugging: Output session information
+                    // echo "<pre>";
+                    // var_dump($_SESSION);
+                    // echo "</pre>";
+                    // ?>
 
 
                     <!-- <a href="signout.php" tite="Logout">Sign out</a> -->
-
-
-
-
                 </div>
             </div>
             <ul class="navbar-nav">
@@ -82,9 +91,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/events/event-list.php">Events list</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/events/event-view.php">Events view</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/top-volunteer.php">Top Volunteer</a>

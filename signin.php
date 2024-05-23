@@ -37,57 +37,64 @@ if (isset($_SESSION['roleId'])) {
 	include './includes/navbar.php';
 	include './conn.php';
 
-	$emailAddress = $_POST["emailAddress"];
-	$password = $_POST["password"];
-	// Handle sign in
-	if ($_POST['randcheck'] == $_SESSION['rand']) {
-		$get_account_query = "SELECT emailAddress, password FROM Account WHERE emailAddress='$emailAddress'";
-		$account_response = mysqli_query($mysqli, $get_account_query);
+	
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		// Handle sign in
+		$emailAddress = $_POST["emailAddress"];
+		$password = $_POST["password"];
+		if ($_POST['randcheck'] == $_SESSION['rand']) {
+			$get_account_query = "SELECT emailAddress, password FROM Account WHERE emailAddress='$emailAddress'";
+			$account_response = mysqli_query($mysqli, $get_account_query);
 
-		if (!$account_response) {
-			die(mysqli_connect_error());
-		} else if (mysqli_num_rows($account_response) > 0) {
-			$result = mysqli_fetch_array($account_response);
-			$hashPassword = $result['password'];
-			$verify = password_verify($password, $hashPassword);
-			// Verify the password
-			if ($verify) {
-				echo 'Password Verified!';
-				// TODO: clear the password in session
-				$get_account_info = "SELECT accountId, emailAddress, firstName, lastName, contactNumber, roleId FROM Account WHERE emailAddress='$emailAddress'";
-				$account_info = mysqli_query($mysqli, $get_account_info);
-				if (!$account_info) {
-					die(mysqli_connect_error());
+			if (!$account_response) {
+				die(mysqli_connect_error());
+			} else if (mysqli_num_rows($account_response) > 0) {
+				$result = mysqli_fetch_array($account_response);
+				$hashPassword = $result['password'];
+				$verify = password_verify($password, $hashPassword);
+				// Verify the password
+				if ($verify) {
+					echo 'Password Verified!';
+					// TODO: clear the password in session
+					$get_account_info = "SELECT accountId, emailAddress, firstName, lastName, contactNumber, roleId FROM Account WHERE emailAddress='$emailAddress'";
+					$account_info = mysqli_query($mysqli, $get_account_info);
+					if (!$account_info) {
+						die(mysqli_connect_error());
+					}
+					$user = mysqli_fetch_array($account_info);
+					$_SESSION['accountId'] = $user['accountId'];
+					$_SESSION['emailAddress'] = $user['emailAddress'];
+					$_SESSION['firstName'] = $user['firstName'];
+					$_SESSION['lastName'] = $user['lastName'];
+					$_SESSION['contactNumber'] = $user['contactNumber'];
+					$_SESSION['roleId'] = $user['roleId'];
+					// TODO: calculate the session timeout
+					$_SESSION['valid'] = true;
+					$_SESSION['timeout'] = time();
+					echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
+					if ($user['roleId'] == 1) {
+						// navigate to company dashboard
+						header("Location: /dashboard/company-dashboard.php", true, 301);
+						$script = "<script>window.location = '/dashboard/company-dashboard.php';</script>";
+						echo $script;
+						exit();
+					} else {
+						// navigate to volunteer dashboard
+						header("Location: /dashboard/dashboard.php", true, 301);
+						$script = "<script>window.location = '/dashboard/dashboard.php';</script>";
+						echo $script;
+						exit();
+					}
 				}
-				$user = mysqli_fetch_array($account_info);
-				$_SESSION['accountId'] = $user['accountId'];
-				$_SESSION['emailAddress'] = $user['emailAddress'];
-				$_SESSION['firstName'] = $user['firstName'];
-				$_SESSION['lastName'] = $user['lastName'];
-				$_SESSION['contactNumber'] = $user['contactNumber'];
-				$_SESSION['roleId'] = $user['roleId'];
-				// TODO: calculate the session timeout
-				$_SESSION['valid'] = true;
-				$_SESSION['timeout'] = time();
-				echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
-				if ($user['roleId'] == 1) {
-					// navigate to company dashboard
-					header("Location: /dashboard/company-dashboard.php", true, 301);
-					$script = "<script>window.location = '/dashboard/company-dashboard.php';</script>";
-					echo $script;
-					exit();
-				} else {
-					// navigate to volunteer dashboard
-					header("Location: /dashboard/dashboard.php", true, 301);
-					$script = "<script>window.location = '/dashboard/dashboard.php';</script>";
-					echo $script;
-					exit();
-				}
+			} else {
+				echo '<div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">';
+				echo '<strong>Opps!</strong> Invalid Credentials. Please try again.';
+				echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 			}
-		} else {
-			echo "<h3 class='text-danger'>Invalid. Please try again.</h3>";
 		}
 	}
+
+
 	?>
 
 	<div class="sign-body">

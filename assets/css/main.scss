@@ -805,6 +805,17 @@ li {
             font-weight: bold;
             text-transform: normal;
             font-size: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        p {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Number of lines to show */
+            -webkit-box-orient: vertical;
         }
 
         ul {
@@ -927,7 +938,8 @@ li {
             }
         }
 
-        .btn-main, .btn-main2{
+        .btn-main,
+        .btn-main2 {
             padding: 10px 15px;
             width: fit-content;
         }

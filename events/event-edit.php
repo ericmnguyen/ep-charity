@@ -1,4 +1,3 @@
-<!-- let access if company -->
 <?php
 session_start();
 ob_start();
@@ -6,6 +5,83 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
     header("Location: /404.php");
     exit();
 }
+
+require_once '../conn.php';
+
+if (!isset($_GET['eventId'])) {
+    header("Location: /events/event-list.php");
+    exit();
+}
+
+$eventId = $_GET['eventId'];
+$accountId = $_SESSION['accountId'];
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $eventName = $mysqli->real_escape_string($_POST['eventName']);
+    $description = $mysqli->real_escape_string($_POST['description']);
+    $eventType = $mysqli->real_escape_string($_POST['eventType']);
+    $startDate = $mysqli->real_escape_string($_POST['startDate']);
+    $endDate = $mysqli->real_escape_string($_POST['endDate']);
+    $startTime = $mysqli->real_escape_string($_POST['startTime']);
+    $endTime = $mysqli->real_escape_string($_POST['endTime']);
+    $venueName = $mysqli->real_escape_string($_POST['venueName']);
+    $address = $mysqli->real_escape_string($_POST['address']);
+    $locationType = $mysqli->real_escape_string($_POST['locationType']);
+    $maxAttendees = $mysqli->real_escape_string($_POST['maxAttendees']);
+    $eventStatus = $mysqli->real_escape_string($_POST['eventStatus']);
+    $accountId = $_SESSION['accountId'];
+
+    $sqlUpdate = "UPDATE event SET 
+                    eventName = '$eventName',
+                    description = '$description',
+                    eventType = '$eventType',
+                    startDate = '$startDate',
+                    endDate = '$endDate',
+                    startTime = '$startTime',
+                    endTime = '$endTime',
+                    venueName = '$venueName',
+                    address = '$address',
+                    locationType = '$locationType',
+                    maxAttendees = '$maxAttendees',
+                    eventStatus = '$eventStatus'
+                  WHERE eventId = '$eventId' AND accountId = '$accountId'";
+
+    if ($mysqli->query($sqlUpdate) === TRUE) {
+        $_SESSION['success_message'] = "Event Updated.";
+        header("Location: /events/event-list.php");
+        exit();
+    } else {
+        echo "Error: " . $sqlUpdate . "<br>" . $mysqli->error;
+        $_SESSION['error_message'] = "Event Not Updated.";
+        header("Location: /events/event-list.php");
+        exit();
+    }
+}
+
+// Fetch existing event details
+$sqlEvent = "SELECT * FROM event WHERE eventId = '$eventId' AND accountId = '$accountId'";
+$resultEvent = $mysqli->query($sqlEvent);
+
+if ($resultEvent->num_rows > 0) {
+    $rowEvent = $resultEvent->fetch_assoc();
+    $eventName = $rowEvent['eventName'];
+    $description = $rowEvent['description'];
+    $eventType = $rowEvent['eventType'];
+    $startDate = $rowEvent['startDate'];
+    $endDate = $rowEvent['endDate'];
+    $startTime = $rowEvent['startTime'];
+    $endTime = $rowEvent['endTime'];
+    $venueName = $rowEvent['venueName'];
+    $address = $rowEvent['address'];
+    $locationType = $rowEvent['locationType'];
+    $maxAttendees = $rowEvent['maxAttendees'];
+    $eventStatus = $rowEvent['eventStatus'];
+} else {
+    die("No event found for the specified event ID.");
+}
+
+$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -18,123 +94,74 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
 <body>
 
     <?php include '../includes/navbar.php' ?>
-    <?php
-    require_once '../conn.php';
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $eventName = $mysqli->real_escape_string($_POST['eventName']);
-        $description = $mysqli->real_escape_string($_POST['description']);
-        $eventType = $mysqli->real_escape_string($_POST['eventType']);
-        $startDate = $mysqli->real_escape_string($_POST['startDate']);
-        $endDate = $mysqli->real_escape_string($_POST['endDate']);
-        $startTime = $mysqli->real_escape_string($_POST['startTime']);
-        $endTime = $mysqli->real_escape_string($_POST['endTime']);
-        $venueName = $mysqli->real_escape_string($_POST['venueName']);
-        $address = $mysqli->real_escape_string($_POST['address']);
-        $locationType = $mysqli->real_escape_string($_POST['locationType']);
-        $maxAttendees = $mysqli->real_escape_string($_POST['maxAttendees']);
-        $eventStatus = $mysqli->real_escape_string($_POST['eventStatus']);
-        $accountId = $_SESSION['accountId'];
-
-        $sql = "INSERT INTO event (eventName, description, eventType, startDate, endDate, startTime, endTime, venueName, address, locationType, maxAttendees, eventStatus, accountId) VALUES ('$eventName', '$description', '$eventType', '$startDate', '$endDate', '$startTime', '$endTime', '$venueName', '$address', '$locationType', '$maxAttendees', '$eventStatus', '$accountId')";
-
-        if ($mysqli->query($sql) === TRUE) {
-            $_SESSION['success_message'] = "Event Created.";
-            header("Location: /events/event-list.php");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $mysqli->error;
-            $_SESSION['error_message'] = "Event Not Created.";
-            header("Location: /events/event-list.php");
-            exit();
-        }
-    }
-
-    $mysqli->close();
-    ?>
-
-
-
-
-
 
     <main class="container">
-
-
         <div class="form-container">
-
-            <h1>
-                CREATE EVENT <?php echo $_SESSION['accountId']; ?>
-            </h1>
-            <form id="eventForm" class="row form-content" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <h1>Edit Event</h1>
+            <form id="eventForm" class="row form-content" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?eventId=' . $eventId; ?>">
                 <div class="form-floating">
-                    <input class="form-control" id="eventName" type="text" name="eventName" placeholder="Event Name" data-sb-validations="required" />
+                    <input class="form-control" id="eventName" type="text" name="eventName" placeholder="Event Name" value="<?php echo $eventName; ?>" data-sb-validations="required" />
                     <label for="eventName">Event Name</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" id="description" name="description" type="text" placeholder="Description" style="height: 10rem;" data-sb-validations="required"></textarea>
+                    <textarea class="form-control" id="description" name="description" type="text" placeholder="Description" style="height: 10rem;" data-sb-validations="required"><?php echo $description; ?></textarea>
                     <label for="description">Description</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="eventType" name="eventType" type="text" placeholder="Event Type" data-sb-validations="required" />
+                    <input class="form-control" id="eventType" name="eventType" type="text" placeholder="Event Type" value="<?php echo $eventType; ?>" data-sb-validations="required" />
                     <label for="eventType">Event Type</label>
                 </div>
                 <div class="col-12 col-md-6 form-floating">
-                    <input class="form-control" id="startDate" name="startDate" type="date" placeholder="Start Date" data-sb-validations="required" />
+                    <input class="form-control" id="startDate" name="startDate" type="date" placeholder="Start Date" value="<?php echo $startDate; ?>" data-sb-validations="required" />
                     <label for="startDate">Start Date</label>
                 </div>
                 <div class="col-12 col-md-6 form-floating">
-                    <input class="form-control" id="endDate" name="endDate" type="date" placeholder="End Date" data-sb-validations="required" />
+                    <input class="form-control" id="endDate" name="endDate" type="date" placeholder="End Date" value="<?php echo $endDate; ?>" data-sb-validations="required" />
                     <label for="endDate">End Date</label>
                 </div>
                 <div class="col-12 col-md-6 form-floating">
-                    <input class="form-control" id="startTime" name="startTime" type="time" placeholder="Start Time" data-sb-validations="required" />
+                    <input class="form-control" id="startTime" name="startTime" type="time" placeholder="Start Time" value="<?php echo $startTime; ?>" data-sb-validations="required" />
                     <label for="startTime">Start Time</label>
                 </div>
                 <div class="col-12 col-md-6 form-floating">
-                    <input class="form-control" id="endTime" name="endTime" type="time" placeholder="End Time" data-sb-validations="required" />
+                    <input class="form-control" id="endTime" name="endTime" type="time" placeholder="End Time" value="<?php echo $endTime; ?>" data-sb-validations="required" />
                     <label for="endTime">End Time</label>
                 </div>
                 <div class="form-floating">
                     <select class="form-select" id="locationType" name="locationType" aria-label="LocationType">
-                        <option value="In-Person">In-Person</option>
-                        <option value="Online">Online</option>
-                        <option value="Hybrid">Hybrid</option>
+                        <option value="In-Person" <?php if ($locationType == 'In-Person') echo 'selected'; ?>>In-Person</option>
+                        <option value="Online" <?php if ($locationType == 'Online') echo 'selected'; ?>>Online</option>
+                        <option value="Hybrid" <?php if ($locationType == 'Hybrid') echo 'selected'; ?>>Hybrid</option>
                     </select>
                     <label for="locationType">Location Type</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="venueName" name="venueName" type="text" placeholder="Venue Name" data-sb-validations="required" />
+                    <input class="form-control" id="venueName" name="venueName" type="text" placeholder="Venue Name" value="<?php echo $venueName; ?>" data-sb-validations="required" />
                     <label for="venueName">Venue/Platform</label>
                 </div>
                 <div class="form-floating">
-                    <textarea class="form-control" id="address" name="address" type="text" placeholder="Address" style="height: 7rem;" data-sb-validations="required"></textarea>
+                    <textarea class="form-control" id="address" name="address" type="text" placeholder="Address" style="height: 7rem;" data-sb-validations="required"><?php echo $address; ?></textarea>
                     <label for="address">Full Address</label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="maxAttendees" name="maxAttendees" type="number" placeholder="Max Attendees" data-sb-validations="required" />
+                    <input class="form-control" id="maxAttendees" name="maxAttendees" type="number" placeholder="Max Attendees" value="<?php echo $maxAttendees; ?>" data-sb-validations="required" />
                     <label for="maxAttendees">Max Attendees</label>
                 </div>
                 <div class="form-floating">
                     <select class="form-select" id="eventStatus" name="eventStatus" aria-label="eventStatus">
-                        <option value="Published">Published</option>
-                        <option value="Ongoing">Ongoing</option>
-                        <option value="Finished">Finished</option>
+                        <option value="Published" <?php if ($eventStatus == 'Published') echo 'selected'; ?>>Published</option>
+                        <option value="Ongoing" <?php if ($eventStatus == 'Ongoing') echo 'selected'; ?>>Ongoing</option>
+                        <option value="Finished" <?php if ($eventStatus == 'Finished') echo 'selected'; ?>>Finished</option>
                     </select>
-                    <label for="eventStatus">Location Type</label>
+                    <label for="eventStatus">Event Status</label>
                 </div>
                 <div class="d-flex flex-wrap ps-1">
-                    <button class="btn btn-main2" id="submitButton" type="submit">Submit</button>
+                    <button class="btn btn-main2" id="submitButton" type="submit">Update</button>
                     <button class="btn btn-main" id="" type="reset">Reset</button>
                 </div>
-
             </form>
         </div>
-
     </main>
-
-
-
 
     <!-- footer -->
     <?php include '../includes/footer.php' ?>
@@ -249,7 +276,6 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
             }, 'End time must be greater than start time.');
         });
     </script>
-
 
 </body>
 

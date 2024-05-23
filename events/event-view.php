@@ -1,3 +1,14 @@
+<?php
+ob_start();
+session_start();
+// Ensure no output before the headers are sent
+// if (!isset($_GET['eventId'])) {
+//     header("Location: /events/event-list.php");
+//     exit;
+// }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +18,153 @@
 
 <body>
 
-    <?php include '../includes/navbar.php' ?>
 
+
+
+    <?php
+    include '../includes/navbar.php';
+
+    include '../conn.php';
+
+    $eventId = $_GET['eventId'];
+    $sqlEvent = "SELECT * FROM event WHERE eventId = '$eventId'";
+    $resultEvent = mysqli_query($mysqli, $sqlEvent);
+
+    // Check for errors
+    if (!$resultEvent) {
+        die("Error executing  query: " . mysqli_error($mysqli));
+    }
+
+    // Fetch the book details
+    if (mysqli_num_rows($resultEvent) > 0) {
+        $rowEvent = mysqli_fetch_assoc($resultEvent);
+        $eventId = $rowEvent['eventId'];
+        $eventName = $rowEvent['eventName'];
+        $description = $rowEvent['description'];
+        $eventType = $rowEvent['eventType'];
+        $startDate = $rowEvent['startDate'];
+        $endDate = $rowEvent['endDate'];
+        $startTime = $rowEvent['startTime'];
+        $endTime = $rowEvent['endTime'];
+        $venueName = $rowEvent['venueName'];
+        $address = $rowEvent['address'];
+        $locationType = $rowEvent['locationType'];
+        $maxAttendees = $rowEvent['maxAttendees'];
+        $createdAt = $rowEvent['createdAt'];
+        $eventStatus = $rowEvent['eventStatus'];
+        $accountId = $rowEvent['accountId'];
+    } else {
+        die("No Event found.");
+    }
+
+
+
+
+
+    // Get company and account details based on the accountId
+    $sqlAccountCompany = "
+            SELECT 
+                Account.accountId,
+                Account.emailAddress,
+                Account.password,
+                Account.firstName,
+                Account.lastName,
+                Account.contactNumber,
+                Account.createdDate,
+                Company.companyId,
+                Company.companyName,
+                Company.website,
+                Company.image
+            FROM 
+                Account
+            JOIN 
+                Company ON Account.accountId = Company.accountId
+            WHERE 
+            Account.accountId = '$accountId'";
+    $resultAccountCompany = mysqli_query($mysqli, $sqlAccountCompany);
+
+    // Check for errors
+    if (!$resultAccountCompany) {
+        die("Error executing query: " . mysqli_error($mysqli));
+    }
+
+    // Fetch the company and account details
+    if (mysqli_num_rows($resultAccountCompany) > 0) {
+        $rowAccountCompany = mysqli_fetch_assoc($resultAccountCompany);
+        $emailAddress = $rowAccountCompany['emailAddress'];
+        $firstName = $rowAccountCompany['firstName'];
+        $lastName = $rowAccountCompany['lastName'];
+        $contactNumber = $rowAccountCompany['contactNumber'];
+        // $companyId = $rowAccountCompany['companyId'];
+        $companyName = $rowAccountCompany['companyName'];
+        $website = $rowAccountCompany['website'];
+        $companyImage = $rowAccountCompany['image'];
+    } else {
+        die("No company found for the specified account ID.");
+    }
+
+
+    // Initialize variables
+    $accountEventStatus = '';
+
+    if (isset($_SESSION['accountId']) && isset($_GET['eventId'])) {
+        $accountId = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
+        $eventId = mysqli_real_escape_string($mysqli, $_GET['eventId']);
+
+        $sql = "SELECT accountEventStatus FROM accountevent WHERE accountId = ? AND eventId = ?";
+        $stmt = $mysqli->prepare($sql);
+
+        $stmt->bind_param("ii", $accountId, $eventId);
+        $stmt->execute();
+        $stmt->bind_result($accountEventStatus);
+        $stmt->fetch();
+
+        echo $accountEventStatus;
+
+        $stmt->close();
+    } 
+
+
+    ?>
+
+
+
+    <?php
+    include '../conn.php';
+    $currentURL = $_SERVER['REQUEST_URI'];
+
+    // Check if form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $eventIdApply = $_POST["eventId"];
+        $accountIdApply = $_POST["accountId"];
+
+        $sql = "INSERT INTO accountevent (eventId, accountId, accountEventStatus) VALUES (?, ?, 'Applied')";
+        $stmt = $mysqli->prepare($sql);
+
+        $stmt->bind_param("ii", $eventIdApply, $accountIdApply);
+
+        // Execute statement
+        if ($stmt->execute() === TRUE) {
+            $_SESSION['success_message'] = "asdasd Created.";
+            echo "Record inserted successfully";
+            echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply  . ' ' . $_GET['eventId'] . ', Account ID: ' . $accountIdApply . '");</script>';
+            // header("Location: $currentURL");
+            header("Location: /events/event-list.php");
+        } else {
+            $_SESSION['error_message'] = "asdasd Not Created.";
+            // echo "Error: " . $sql . "<br>" . $mysqli->error;
+            // echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply . ', Account ID: ' . $accountIdApply . '");</script>';
+            header("Location: /events/event-list.php");
+        }
+
+        // Close statement
+        $stmt->close();
+    }
+
+
+
+
+    ?>
 
 
     <div class="event-banner">
@@ -18,6 +174,9 @@
 
     <main class="container">
 
+
+
+
         <div class="event-container">
             <div class="row">
                 <div class="col-lg-8">
@@ -26,29 +185,52 @@
                         <!-- Event details -->
                         <div class="row">
 
-                            <h1>Scout Group Treasurer</h1>
+                            <h1><?php echo $eventName ?></h1>
 
-                            <div class="d-flex gap-3 mb-5 alert alert-dark">
-                                <h4 class="mr-4 mb-0"> Admin Actions: </h4>
-                                <button class="btn btn-warning">EDIT</button>
-                                <button class="btn btn-danger">DELETE</button>
-                            </div>
+                            <?php
+                            if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
+                                if ($accountId === $_SESSION['accountId']) {
+                            ?>
+                                    <div class="d-flex gap-3 mb-5 alert alert-dark">
+                                        <h4 class="mr-4 mb-0"> Admin Actions: </h4>
+                                        <a href="/events/event-edit.php?eventId=<?php echo $eventId; ?>" class="btn btn-warning">EDIT</a>
+                                        <button class="btn btn-danger">DELETE</button>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+
 
                             <p class="text-muted">
                                 <i class="fa-map-marker-alt fa me-3"> </i>
-                                <a class="text-muted text-decoration-underline" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Views on Google Maps"> WAYVILLE, 5034 SA</a>
+                                <a class="text-muted"> <?php echo $venueName ?></a>
+                                |
+                                <a class="text-muted"> <?php echo $address ?></a>
+                                |
+                                <a class="text-muted"> <?php echo $locationType ?></a>
+
+                            </p>
+                            <p class="text-muted">
+                                <i class="fa-map-marker-alt fa me-3"> </i>
+                                <a class="text-muted">Event Type: <?php echo $eventType ?></a>
+
+                            </p>
+                            <p class="text-muted">
+                                <i class="fa-map-marker-alt fa me-3"> </i>
+                                <a class="text-muted">Max Attendees: <?php echo $maxAttendees ?></a>
                             </p>
 
                             <ul class="list-inline text-sm mb-4">
-                                <li class="list-inline-item me-3 my-1"> <i class="fa fa-tags text-primary me-3"> </i>Ongoing</li>
+                                <li class="list-inline-item me-3 my-1"> <i class="fa fa-tags text-primary me-3"> </i> <?php echo $eventStatus ?> </li>
                             </ul>
 
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p class="text-uppercase text-sm text-muted mb-0"><i class="far fa-clock me-2"></i>Posted on Apr 29, 2024</p>
+                                    <p class="text-uppercase text-sm text-muted mb-0"><i class="far fa-clock me-2"></i>Posted on <?php echo $createdAt ?></p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p class="text-uppercase text-sm text-muted mb-0"><i class="far fa-clock me-2"></i>Last updated on Apr 30, 2024</p>
+                                    <p class="text-uppercase text-sm text-muted mb-0"><i class="far fa-clock me-2"></i>Last updated on <?php echo $createdAt ?></p>
                                 </div>
                             </div>
 
@@ -58,12 +240,9 @@
 
                         <!-- event description -->
                         <div class="row my-3">
-                            <p class="text-muted">Are you are looking for an opportunity to use your financial expertise to support a local team? We're on the lookout for someone we can count on, who can empower their local Scout Group to excel!</p>
-
-                            <h6 class="mb-3">
-                                The role</h6>
                             <p class="text-muted">
-                                What does this role include?<br><br>1. General book keeping; recording, summarizing and invoicing<br>2. Foster payment plans with families to ensure scouting stays accessible to all<br>3. Provide monthly reports to your fellow committee members<br><br>How will I be supported?<br><br>Any job can be flexible to accommodate the diverse needs of today’s society.<br>We have a dedicated finance support team who will be there to provide training and support for you at every step!</p>
+                                <?php echo $description ?>
+                            </p>
 
                         </div>
                     </div>
@@ -75,13 +254,18 @@
                         </h4>
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="text-uppercase text-sm text-muted"><i class="far fa-calendar me-2"></i>Start date: May 1, 2024 </p>
+                                <p class="text-uppercase text-sm text-muted"><i class="far fa-calendar me-2"></i>Start date: <?php echo $startTime ?> </p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="text-uppercase text-sm text-muted"><i class="far fa-calendar me-2"> </i>End date: - </p>
+                                <p class="text-uppercase text-sm text-muted"><i class="far fa-calendar me-2"> </i>End date: - <?php echo $endDate ?></p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="text-uppercase text-sm text-muted"><i class="far fa-clock me-2"> </i>Time: 10am - 2pm
+                                <p class="text-uppercase text-sm text-muted"><i class="far fa-clock me-2"> </i>Time:
+                                    <?php
+                                    $startTimeAMPM = date("g:i A", strtotime($startDate . ' ' . $startTime));
+                                    $endTimeAMPM = date("g:i A", strtotime($endDate . ' ' . $endTime));
+                                    echo $startTimeAMPM . ' - ' . $endTimeAMPM;
+                                    ?>
                                 </p>
                             </div>
                         </div>
@@ -89,7 +273,7 @@
 
 
                     <!-- Posted by -->
-                    <div class="event-block mt-5">
+                    <div class="event-block mt-5 border-bottom">
                         <div class="d-flex">
                             <div>
                                 <p>
@@ -97,12 +281,10 @@
                                         Posted by
                                     </span>
                                     <br>
-                                    <a class="text-uppercase text-decoration-underline" href="">
-                                        <strong> The Scout Association of Australia, South Australian Branch Inc</strong>
+                                    <a class="text-uppercase" href="">
+                                        <p> <?php echo $firstName ?> <?php echo $lastName ?> (Organization Representative)</p>
+                                        <h4> <?php echo $companyName ?></h4>
                                     </a>
-                                </p>
-                                <p class="text-muted text-sm mb-2">
-                                    Scouting is more than just a place for young people to have fun. “Creating a Better World” and “Education for Life” are common phrases connected to Scouting. As a global voluntary, non-political, educational movement of young people, supported by adults, it is open to, and inclusive of all.
                                 </p>
                             </div>
                         </div>
@@ -125,66 +307,101 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a class="text-uppercase text-decoration-underline" href="">
-                                <strong>
-                                    The Scout Association of Australia, South Australian Branch Inc
-                                </strong>
+                            <a class="text-uppercase" href="">
+                                <h4>
+                                    <?php echo $companyName ?>
+                                </h4>
                             </a>
                             <p class="text-muted py-2">
-                                Scouts SA is part of a global movement with a common Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, excepturi libero? Voluptatibus nesciunt aliquam illum debitis incidunt architecto impedit possimus eligendi pariatur. Dolores in eligendi facilis dicta repellendus, eos doloribus.
                             </p>
 
                             <!-- social media and contact links -->
                             <ul class="list-inline mb-0 socials">
-                                <li class="list-inline-item ">
-                                    <a class="text-primary text-lg" href="#">
-                                        <i class="fa fa-globe"></i>
+                                <li class="list-inline-item mb-3">
+                                    <a class="text-primary text-lg" target="_blank" href=" <?php echo $website ?>">
+                                        <i class="fa me-2 fa-globe "></i> <?php echo $website ?>
                                     </a>
                                 </li>
-                                <li class="list-inline-item ">
-                                    <a class="text-primary text-lg" href="#">
-                                        <i class="fab fa-facebook"></i>
+                                <br>
+                                <li class="list-inline-item mb-3">
+                                    <a class="text-primary text-lg" target="_blank" href="mailto:<?php echo $emailAddress ?>">
+                                        <i class="me-2 fa fa-envelope"></i> <?php echo $emailAddress ?>
                                     </a>
                                 </li>
-                                <li class="list-inline-item ">
-                                    <a class="text-primary text-lg" href="#">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                                <span class="mx-2"> | </span>
-                                <li class="list-inline-item ">
-                                    <a class="text-primary text-lg" href="#">
-                                        <i class="fa fa-envelope"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item ">
-                                    <a class="text-primary text-lg" href="#">
-                                        <i class="fa fa-phone"></i>
+                                <br>
+                                <li class="list-inline-item mb-3">
+                                    <a class="text-primary text-lg" target="_blank" href="tel:<?php echo $contactNumber ?>">
+                                        <i class="fa me-2 fa-phone"></i> <?php echo $contactNumber ?>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="card-body border m-4 rounded">
                             <p class="text-muted text-sm">
-                                Apply for this opportunity in two easy steps:
+                                Apply for this opportunity
                             </p>
-                            <p class="text-muted text-sm">
-                                1. Review the opportunity details to check that the role is right for you.
-                            </p>
-                            <p class="text-muted text-sm">
-                                2. Hit apply now and complete the application form.
-                            </p>
-                            <p class="text-muted text-sm">
-                                Estimated time required to complete the application is <strong> 3 minutes.</strong>
-                            </p>
-                            <div class="d-grid mb-4">
-                                <a class="btn btn-main2" href="">
-                                    Apply Now
-                                </a>
-                            </div>
-                            <p class="text-muted text-sm text-center">
-                                You can edit or withdraw your application if needed.
-                            </p>
+
+                            <?php
+                            if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
+                                if ($accountEventStatus == "Applied") {
+                                    echo ' <a class="btn btn-success disabled">Applied</a>';
+                                } else {
+                            ?>
+
+                                    <div class="d-grid mb-4">
+                                        <a class="btn btn-main2" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
+                                            Apply Now
+                                        </a>
+                                    </div>
+
+                                    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="applyModalLabel">Quick Apply</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?eventId=' . $eventId; ?>">
+                                                    <div class="modal-body">
+
+
+                                                        <input type="hidden" name="eventId" value="<?php echo $eventId ?>">
+                                                        <input type="hidden" name="accountId" value=" <?php echo $_SESSION['accountId'] ?>">
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                             
+                            } elseif (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
+                            ?>
+                                <div class="d-grid mb-4">
+                                    Company Account cannot apply. User your volunteer account.
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="d-grid mb-4">
+                                    <a class="btn btn-main2" href="/signin.php">
+                                        Sign in to Apply
+                                    </a>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -199,9 +416,6 @@
     <!-- footer -->
     <?php include '../includes/footer.php' ?>
     <!-- page-specific js -->
-    <script>
-
-    </script>
 
 </body>
 

@@ -612,6 +612,16 @@ li {
   font-weight: bold;
   text-transform: normal;
   font-size: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.event .event-list-content p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* Number of lines to show */
+  -webkit-box-orient: vertical;
 }
 .event .event-list-content ul li {
   display: inline-block;
@@ -697,7 +707,8 @@ li {
   padding: 1rem 1.25rem;
   left: 1px;
 }
-.form-container .form-content .btn-main, .form-container .form-content .btn-main2 {
+.form-container .form-content .btn-main,
+.form-container .form-content .btn-main2 {
   padding: 10px 15px;
   width: -moz-fit-content;
   width: fit-content;

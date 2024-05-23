@@ -7,7 +7,7 @@
                   <h2>My Account</h2>
               </li>
               <li class="nav-item">
-                  <a href="/profile/profile-edit.php" class="nav-link active">
+                  <a href="/profile/profile-edit.php" class="nav-link">
                       <i class="far fa-user-circle"></i>
                       Edit Account </a>
               </li>
@@ -15,8 +15,8 @@
               <li class="nav-title">
                   <h2>Events</h2>
               </li>
-              <li class="nav-item active">
-                  <a href="/profile/profile-events-past.php" class="nav-link active">
+              <li class="nav-item activeNo">
+                  <a href="/profile/profile-events-past.php" class="nav-link activeNo">
                       <i class="fa fa-cubes"></i>
                       Past Events </a>
               </li>

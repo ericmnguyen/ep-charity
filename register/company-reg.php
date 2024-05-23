@@ -3,7 +3,7 @@
 session_start();
 ob_start();
 if (isset($_SESSION['roleId'])) {
-  header("Location: /profile/profile.php");
+  header("Location: /profile/profile-edit.php");
   exit();
 }
 ?>

@@ -24,7 +24,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="offer">
             <!-- <a href="./"> New Events</a> -->
 
-            <a href="">1:company and 2:Volunter................</a> 
+            <a href="">1:company and 2:Volunter................</a>
 
             <?php
             if (isset($_SESSION['roleId'])) {
@@ -56,21 +56,18 @@ if (session_status() == PHP_SESSION_NONE) {
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
-
-
-
                 <div class="user-nav-btn">
-
-                    <!-- <a href="/profile/profile.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-heart">
-                            <span>5</span>
-                        </i>
-                    </a> -->
 
                     <?php
                     if (isset($_SESSION['roleId'])) {
-                        echo '<a href="/profile/profile.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
-
-                        echo '<a href="/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        if (($_SESSION['roleId'] == 1)) {
+                            echo '<a href="/404.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        }
+                        if (($_SESSION['roleId'] == 2)) {
+                            echo '<a href="/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        }
                     } else {
                         echo '<a href="/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';
                     }
@@ -79,7 +76,8 @@ if (session_status() == PHP_SESSION_NONE) {
                     // echo "<pre>";
                     // var_dump($_SESSION);
                     // echo "</pre>";
-                    // ?>
+                    // 
+                    ?>
 
 
                     <!-- <a href="signout.php" tite="Logout">Sign out</a> -->
@@ -99,7 +97,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <a class="nav-link" href="/comapnies.php">Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/profile.php">Account</a>
+                    <a class="nav-link" href="/profile/profile-edit.php">Account</a>
                 </li>
             </ul>
 

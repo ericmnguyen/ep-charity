@@ -122,7 +122,7 @@ session_start();
         echo $accountEventStatus;
 
         $stmt->close();
-    } 
+    }
 
 
     ?>
@@ -290,8 +290,6 @@ session_start();
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-lg-4 my-lg-0 my-5 apply-block">
                     <div class="card mb-5 ms-lg-4">
                         <div class="card-header bg-white py-4">
@@ -379,9 +377,8 @@ session_start();
                                     </div>
                                 <?php
                                 }
-                             
                             } elseif (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
-                            ?>
+                                ?>
                                 <div class="d-grid mb-4">
                                     Company Account cannot apply. User your volunteer account.
                                 </div>
@@ -404,6 +401,52 @@ session_start();
 
                         </div>
                     </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card rounded-0">
+                        <div class="card-header">
+                            <h4 class="mb-0">Discussion Board </h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Are you going to this event, or would you like to? <br> Let the community know what you're looking forward to most by posting your comments here!</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <div class="btn btn-main2 mt-1">Comment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                 <div class="conatiner bg-white">
+                        <div class="row p-3">
+                            <div class="col-md-12 mb-2">
+                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title">Fname Lane says: </h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title">Fname Lane says: </h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title">Fname Lane says: </h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                 </div>
+
                 </div>
             </div>
         </div>

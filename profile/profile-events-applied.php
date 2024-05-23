@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,80 +27,71 @@
                         <div class="profile-content">
 
                             <!-- edit account -->
-                            <div id="acccedit">
-                                <div class="content-title">
-                                    <h2>Account</h2>
-                                    <h4>Applied Events</h4>
-                                </div>
-                                <div class="event row">
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> Local Beach</li>
-                                                <li><i class="far fa-clock"></i> Saturday, June 15th, 9:00 AM - 12:00 PM</li>
-                                            </ul>
-                                            <h2>Beach Cleanup Day</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> City Community Garden</li>
-                                                <li><i class="far fa-clock"></i> Sunday, July 21st, 10:00 AM - 1:00 PM</li>
-                                            </ul>
-                                            <h2>Community Garden Planting</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> Local Community Center, City</li>
-                                                <li><i class="far fa-clock"></i>Sunday, July 29th, 9.00 AM - 12.00 PM</li>
-                                            </ul>
-                                            <h2>Community Outreach Day 2024</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> Local Beach</li>
-                                                <li><i class="far fa-clock"></i> Saturday, June 15th, 9:00 AM - 12:00 PM</li>
-                                            </ul>
-                                            <h2>Beach Cleanup Day</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> Local Senior Center</li>
-                                                <li><i class="far fa-clock"></i> Saturday, August 10th, 2:00 PM - 4:00 PM</li>
-                                            </ul>
-                                            <h2>Senior Center Visitation</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="event-list-content">
-                                            <ul class="">
-                                                <li><i class="fas fa-map-marker-alt"></i> City Park</li>
-                                                <li><i class="far fa-clock"></i> Sunday, September 8th, 9:30 AM - 12:30 PM</li>
-                                            </ul>
-                                            <h2>Park Restoration Project</h2>
-                                            <a href="#" class="btn btn-main">See event</a>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="content-title">
+                                <h2>Applied Events</h2>
+                                <h4>Applied Events</h4>
                             </div>
+
+
+
+
+
+                            <div class="event row">
+                                <?php
+                                require_once '../conn.php';
+
+
+                                if (isset($_SESSION['accountId'])) {
+
+                                    $accountId = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
+
+                                    $sql = "SELECT event.* FROM accountevent JOIN event ON accountevent.eventId = event.eventId WHERE accountevent.accountId = $accountId AND accountevent.accountEventStatus = 'Applied'  AND event.eventStatus = 'Published'";
+
+                                    $result = mysqli_query($mysqli, $sql);
+
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+
+
+
+                                            <div class="col-12">
+                                                <div class="event-list-content">
+                                                    <ul class="">
+                                                        <li><i class="fas fa-map-marker-alt"></i> <?php echo $row['address']; ?></li>
+                                                        <li><i class="far fa-clock"></i> <?php echo $row['startDate'] ?> ,
+                                                            <?php
+                                                            $startTimeAMPM = date("g:i A", strtotime($row['startDate'] . ' ' . $row['startTime']));
+                                                            $endTimeAMPM = date("g:i A", strtotime($row['endDate'] . ' ' . $row['endTime']));
+                                                            echo $startTimeAMPM . ' - ' . $endTimeAMPM;
+                                                            ?></li>
+                                                    </ul>
+                                                    <h2><?php echo $row['eventName']; ?></h2>
+                                                    <p><?php echo $row['description']; ?></p>
+                                                    <a href="/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
+                                                </div>
+                                            </div>
+
+
+
+                                <?php
+                                        }
+                                    } else {
+                                        echo "No events found.";
+                                    }
+                                } else {
+                                    // If accountId is not provided
+                                    echo "Please provide accountId";
+                                }
+                                // Close the database connection
+                                $mysqli->close();
+                                ?>
+                            </div>
+
+
+
+
                         </div>
                     </div>
                 </div>

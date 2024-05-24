@@ -67,7 +67,7 @@ CREATE TABLE `Company` (
 
 
 CREATE TABLE `Event` (
-    eventId INT AUTO_INCREMENT,
+    eventId INT AUTO_INCREMENT NOT NULL,
     eventName VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     eventType VARCHAR(100) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `Event` (
     locationType ENUM('In-Person', 'Online', 'Hybrid') NOT NULL,
     maxAttendees INT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    eventStatus ENUM('Published', 'Ongoing', 'Finished') NOT NULL,
+    eventStatus ENUM('Published', 'Ongoing', 'Finished') DEFAULT 'Published' NOT NULL,
 
     accountId INT NOT NULL, 
 
@@ -133,3 +133,15 @@ ADD FOREIGN KEY (accountId) REFERENCES Account(accountId);
 -- Role
 INSERT INTO `Role`(`roleName`) VALUES('company'), ('staff');
 --
+INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+VALUES('Event name', 'this is description', 'Type', '2024/05/16', '2024/05/17', '06:00:00', '22:00:00', 'ICC',
+'5 Smith St, NSW', 'In-person', 20, 2);
+INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+VALUES('Event 2 bla', 'blablbalblab', 'conf', '2024/07/16', '2024/07/17', '06:00:00', '22:00:00', 'CBD',
+'65 Smith St, NSW', 'Online', 50, 2);
+INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+VALUES('Event 3 hihii', 'description ne', 'banq', '2024/05/20', '2024/05/28', '06:00:00', '22:00:00', 'Central',
+'5 Road Rd, NSW', 'In-person', 20, 2);

@@ -27,6 +27,17 @@
     ?>
 
 
+    <?php
+    // include '../conn.php';
+    // $searchText = $_GET['searchText'];
+    // $startDate = $_GET['startDate'];
+    // echo "----- " . $searchText;
+    // echo "----- " . $startDate;
+    // $search_query = "SELECT * FROM Event 
+    // WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
+    // AND startDate LIKE'%$startDate%'";
+    // $searchList = mysqli_query($mysqli, $search_query);
+    ?>
 
 
     <main class="container">
@@ -34,47 +45,42 @@
             <div class="event-search">
                 <div class="row">
                     <h4>SEARCH</h4>
-
-
-                    <div class="col-12 col-md-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="text">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </span>
-                            <input type="text" class="form-control" placeholder="searchtxt" aria-label="searchtxt" aria-describedby="text">
+                    <form action="" method="get">
+                        <div class="col-12 col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-text" id="text">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                <input name="searchText" type="text" class="form-control" placeholder="Event name, address, event type " aria-label="searchtxt" aria-describedby="text">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-text" id="date">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </span>
-                            <input type="date" class="form-control" placeholder="date" aria-label="date" aria-describedby="date">
+                        <div class="col-12 col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="date">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                <input name="startDate" type="date" class="form-control" placeholder="date" aria-label="date" aria-describedby="date">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-text" id="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </span>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select Location</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <button type="button" class="btn ms-2 btn-main"> <i class="fa fa-search"></i> </button>
+                        <div class="col-12 col-md-4">
+                            <div class="input-group">
+                                <button type="submit" class="btn ms-2 btn-main"> <i class="fa fa-search"></i> </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-12 d-flex justify-content-end">
-                        <button class="btn btn-link btn-sm">Reset</button>
-                    </div>
+                        <div class="col-12 col-md-12 d-flex justify-content-end">
+                            <button class="btn btn-link btn-sm">Reset</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="event row">
                 <?php
                 require_once '../conn.php';
-                $sql = "SELECT * FROM event";
+                $searchText = $_GET['searchText'];
+                $startDate = $_GET['startDate'];
+                $sql = "SELECT * FROM Event 
+                WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
+                AND startDate LIKE'%$startDate%'";
                 $result = mysqli_query($mysqli, $sql);
 
                 if (mysqli_num_rows($result) > 0) {

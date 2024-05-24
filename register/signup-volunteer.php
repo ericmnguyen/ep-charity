@@ -28,7 +28,6 @@ if (isset($_SESSION['roleId'])) {
 					validateDate("#dob") &&
 					validatePassword();
 				if (isValidForm) {
-					// TODO: submit form
 					return true;
 				}
 				return false;

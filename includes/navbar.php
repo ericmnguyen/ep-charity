@@ -16,8 +16,8 @@ if (session_status() == PHP_SESSION_NONE) {
 ?>
 
 <?php
-$root_directory = '/~20634982/ep-charity';
-// $root_directory = '';
+// $root_directory = '/~20634982/ep-charity';
+$root_directory = '';
 ?>
 
 <div class="topbar">

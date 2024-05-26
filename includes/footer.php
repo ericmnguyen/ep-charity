@@ -1,6 +1,6 @@
  <?php
-    $root_directory = '/~20634982/ep-charity';
-    // $root_directory = '';
+    // $root_directory = '/~20634982/ep-charity';
+    $root_directory = '';
     ?>
 
  <div class="footer-features d-none d-md-flex">

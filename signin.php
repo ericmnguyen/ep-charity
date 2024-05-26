@@ -4,7 +4,7 @@ session_start();
 ob_start();
 
 
-include('/config.php');
+include('config.php');
 
 
 if (isset($_SESSION['roleId'])) {

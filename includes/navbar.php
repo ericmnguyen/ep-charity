@@ -85,19 +85,19 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/events/event-form.php">Events form</a>
+                    <a class="nav-link active" href="./events/event-form.php">Events form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/events/event-list.php">Events list</a>
+                    <a class="nav-link" href="./events/event-list.php">Events list</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/top-volunteer.php">Top Volunteer</a>
+                    <a class="nav-link" href="./top-volunteer.php">Top Volunteer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/comapnies.php">Companies</a>
+                    <a class="nav-link" href="./comapnies.php">Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/profile-edit.php">Account</a>
+                    <a class="nav-link" href="./profile/profile-edit.php">Account</a>
                 </li>
             </ul>
 

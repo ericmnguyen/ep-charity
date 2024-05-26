@@ -103,6 +103,7 @@ CREATE TABLE `Review` (
   eventId INT NOT NULL,
   accountId INT NOT NULL,
   rating INT,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   message VARCHAR(2000),
   
   PRIMARY KEY(reviewId)
@@ -132,7 +133,7 @@ ADD FOREIGN KEY (accountId) REFERENCES Account(accountId);
 --
 -- Role
 INSERT INTO `Role`(`roleName`) VALUES('company'), ('staff');
---
+-- events of commbank
 INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
 `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
 VALUES('Event name', 'this is description', 'Type', '2024/05/16', '2024/05/17', '06:00:00', '22:00:00', 'ICC',
@@ -141,7 +142,8 @@ INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDa
 `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
 VALUES('Event 2 bla', 'blablbalblab', 'conf', '2024/07/16', '2024/07/17', '06:00:00', '22:00:00', 'CBD',
 '65 Smith St, NSW', 'Online', 50, 2);
+-- events of woolies group
 INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
 `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
-VALUES('Event 3 hihii', 'description ne', 'banq', '2024/05/20', '2024/05/28', '06:00:00', '22:00:00', 'Central',
-'5 Road Rd, NSW', 'In-person', 20, 2);
+VALUES('Event woolies', 'description woolies', 'catering', '2024/06/12', '2024/06/14', '06:00:00', '23:59:00', 'West Ryde',
+'10 David Rd, NSW', 'Hybrid', 50, 3);

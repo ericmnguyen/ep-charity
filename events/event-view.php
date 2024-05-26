@@ -134,7 +134,7 @@ session_start();
     $currentURL = $_SERVER['REQUEST_URI'];
 
     // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eventSubmitBtn"])) {
         $eventIdApply = $_POST["eventId"];
         $accountIdApply = $_POST["accountId"];
 
@@ -368,7 +368,7 @@ session_start();
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                                        <button type="submit" name="eventSubmitBtn" class="btn btn-primary">Confirm</button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </form>
@@ -406,46 +406,101 @@ session_start();
                 <div class="col-12">
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <h4 class="mb-0">Discussion Board </h4>
+                            <h4 class="mb-0">Discussion Board</h4>
                         </div>
+                        <?php
+                        // Handle comments
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["commentSubmitBtn"])) {
+                            if ($_POST['randcheck'] == $_SESSION['rand'] && $_POST["commentTextArea"]) {
+                                $comment = $_POST["commentTextArea"];
+                                if (!isset($rating)) {
+                                    $rating = 5;
+                                }
+                                $add_comment_query = "INSERT INTO Review(eventId, accountId, rating, message) VALUES ($eventId, $accountId, $rating, '$comment')";
+                                $add_comment_response = mysqli_query($mysqli, $add_comment_query);
+                                if (!$add_comment_response) {
+                                    die(mysqli_connect_error());
+                                }
+                            }
+                        }
+                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
+                            // TODO: only allows volunteers who joined this event to comment
+                        ?>
+                            <form action="" method="post">
+                                <?php
+                                $rand = rand();
+                                $_SESSION['rand'] = $rand;
+                                ?>
+                                <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Are you going to this event, or would you like to? <br> Let the community know what you're looking forward to most by posting your comments here!</label>
+                                        <textarea class="form-control" id="commentTextArea" name="commentTextArea" rows="3"></textarea>
+                                        <input class="btn btn-main2 mt-1" name="commentSubmitBtn" type="submit" value="Submit" />
+                                    </div>
+                                </div>
+                            </form>
+                        <?php
+                        }
+                        ?>
 
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Are you going to this event, or would you like to? <br> Let the community know what you're looking forward to most by posting your comments here!</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <div class="btn btn-main2 mt-1">Comment</div>
-                            </div>
-                        </div>
                     </div>
 
-                 <div class="conatiner bg-white">
+                    <div class="conatiner bg-white">
                         <div class="row p-3">
-                            <div class="col-md-12 mb-2">
+                            <?php
+                            if (isset($_POST['deleteComment'])) {
+                                $reviewId = $_POST["deleteComment"];
+                                $remove_comment_query = "DELETE FROM Review WHERE reviewId=$reviewId";
+                                $remove_comment_response = mysqli_query($mysqli, $remove_comment_query);
+                                if (!$remove_comment_response) {
+                                    die(mysqli_connect_error());
+                                }
+                            }
+                            $comment_list_query = "SELECT Review.*, Account.firstName, Account.lastName 
+                            FROM ep_charity.Review, Account
+                            WHERE eventId=$eventId AND Account.accountId = Review.accountId";
+                            $comment_list_response = $mysqli->query($comment_list_query);
+                            if (!$comment_list_response) {
+                                die(mysqli_connect_error());
+                            }
+                            if ($comment_list_response->num_rows > 0) {
+                                // output data of each row
+                                while ($row = $comment_list_response->fetch_assoc()) {
+                                    echo "<form method='post' action='' onsubmit=\"return confirm('Remove this comment?')\">
+                                    <div class='col-md-12 mb-2'>
+                                        <div class='card rounded-0 border-top-0 border-start-0 border-end-0 '>
+                                            <div class='card-body'>
+                                                <input type='hidden' name='deleteComment' value=" . $row["reviewId"] . " />
+                                                <h5 class='card-title'>" . $row["firstName"] . " " . $row["lastName"] . "</h5>
+                                                <p class='card-text'>" . $row["message"] . "</p>
+                                                <sub>" . $row["createdAt"] . "</sub>
+                                                <div>";
+                                    if ($accountId == $row["accountId"] || $_SESSION['roleId'] == 1) {
+                                        // handle show remove button
+                                        echo "<button type='submit'><i class='fa fa-trash'></i></button>";
+                                    }
+                                    echo "</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>";
+                                }
+                            } else {
+                                echo "No comments.";
+                            }
+                            ?>
+                            <!-- <div class="col-md-12 mb-2">
                                 <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
                                     <div class="card-body ">
                                         <h5 class="card-title">Fname Lane says: </h5>
                                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
+                                        <sub>date ne</sub>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
-                                    <div class="card-body ">
-                                        <h5 class="card-title">Fname Lane says: </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
-                                    <div class="card-body ">
-                                        <h5 class="card-title">Fname Lane says: </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> -->
                         </div>
-                 </div>
+                    </div>
 
                 </div>
             </div>

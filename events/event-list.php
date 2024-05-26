@@ -1,3 +1,11 @@
+<?php
+session_start();
+// ob_start();
+// if (!isset($_SESSION['roleId'])) {
+//     header("Location: /signin.php");
+//     exit();
+// }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,9 +86,17 @@
                 require_once '../conn.php';
                 $searchText = $_GET['searchText'];
                 $startDate = $_GET['startDate'];
-                $sql = "SELECT * FROM Event 
-                WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
-                AND startDate LIKE'%$startDate%'";
+                $roleId = $_SESSION['roleId'];
+                $accountId = $_SESSION['accountId'];
+                // if ($roleId == 1) {
+                //     $sql = "SELECT * FROM Event 
+                //         WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
+                //         AND startDate LIKE'%$startDate%' AND accountId=$accountId";
+                // } else {
+                    $sql = "SELECT * FROM Event 
+                        WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
+                        AND startDate LIKE'%$startDate%'";
+                // }
                 $result = mysqli_query($mysqli, $sql);
 
                 if (mysqli_num_rows($result) > 0) {

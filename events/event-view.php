@@ -1,9 +1,13 @@
 <?php
 ob_start();
 session_start();
+
+include('../config.php');
+
+
 // Ensure no output before the headers are sent
 // if (!isset($_GET['eventId'])) {
-//     header("Location: /events/event-list.php");
+//     header("Location: $root_directory/events/event-list.php");
 //     exit;
 // }
 ?>
@@ -149,12 +153,12 @@ session_start();
             echo "Record inserted successfully";
             echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply  . ' ' . $_GET['eventId'] . ', Account ID: ' . $accountIdApply . '");</script>';
             // header("Location: $currentURL");
-            header("Location: /events/event-list.php");
+            header("Location: $root_directory/events/event-list.php");
         } else {
             $_SESSION['error_message'] = "asdasd Not Created.";
             // echo "Error: " . $sql . "<br>" . $mysqli->error;
             // echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply . ', Account ID: ' . $accountIdApply . '");</script>';
-            header("Location: /events/event-list.php");
+            header("Location: $root_directory/events/event-list.php");
         }
 
         // Close statement
@@ -418,7 +422,7 @@ session_start();
                         </div>
                     </div>
 
-                 <div class="conatiner bg-white">
+                    <div class="conatiner bg-white">
                         <div class="row p-3">
                             <div class="col-md-12 mb-2">
                                 <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
@@ -445,7 +449,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                 </div>
+                    </div>
 
                 </div>
             </div>

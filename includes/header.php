@@ -1,7 +1,6 @@
  <?php
-//   $root_directory = '/~20634982/ep-charity';
-  $root_directory = '';
-  ?>
+    include('inc_config.php');
+    ?>
 
 
 

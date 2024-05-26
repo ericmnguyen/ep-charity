@@ -13,10 +13,12 @@
     ?>
 
 
-<h1>Page not found or no access</h1>
+    <div class="container p-5 my-5">
+        <h1>Page not found or no access</h1>
+    </div>
 
     <?php include './includes/footer.php' ?>
-   
+
 
 </body>
 

@@ -1,9 +1,10 @@
  <?php
     ob_start();
+
+    include('../config.php'); 
     
     if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] != 2)) {
-        // header("Location: /404.php");
-        echo "<script>location.href = '/404.php';</script>";
+        echo "<script>location.href = '$root_directory/404.php';</script>";
         exit();
     }
     

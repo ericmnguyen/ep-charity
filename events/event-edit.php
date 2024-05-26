@@ -1,15 +1,18 @@
 <?php
 session_start();
+
+include('../config.php');
+
 ob_start();
 if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
-    header("Location: /404.php");
+    header("Location: $root_directory/404.php");
     exit();
 }
 
 require_once '../conn.php';
 
 if (!isset($_GET['eventId'])) {
-    header("Location: /events/event-list.php");
+    header("Location: $root_directory/events/event-list.php");
     exit();
 }
 
@@ -49,12 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($mysqli->query($sqlUpdate) === TRUE) {
         $_SESSION['success_message'] = "Event Updated.";
-        header("Location: /events/event-list.php");
+        header("Location: $root_directory/events/event-list.php");
         exit();
     } else {
         echo "Error: " . $sqlUpdate . "<br>" . $mysqli->error;
         $_SESSION['error_message'] = "Event Not Updated.";
-        header("Location: /events/event-list.php");
+        header("Location: $root_directory/events/event-list.php");
         exit();
     }
 }

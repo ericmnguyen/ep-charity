@@ -5,6 +5,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 
+
+
 // // Debugging: Output session information
 // echo "<pre>";
 // var_dump($_SESSION);
@@ -13,12 +15,17 @@ if (session_status() == PHP_SESSION_NONE) {
 
 ?>
 
+<?php
+$root_directory = '/~20634982/ep-charity';
+// $root_directory = '';
+?>
+
 <div class="topbar">
     <div class="container-fluid">
         <div class="social">
-            <a href="./"><i class="fab fa-instagram-square"></i></a>
-            <a href="./"><i class="fab fa-facebook-square"></i></a>
-            <a href="./"><i class="fab fa-twitter-square"></i></a>
+            <a href="<?php echo $root_directory; ?>"><i class="fab fa-instagram-square"></i></a>
+            <a href="<?php echo $root_directory; ?>"><i class="fab fa-facebook-square"></i></a>
+            <a href="<?php echo $root_directory; ?>"><i class="fab fa-twitter-square"></i></a>
         </div>
 
         <div class="offer">
@@ -36,16 +43,16 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
 
         <div class="help">
-            <a href="./">Blog</a>
-            <a href="./">Need Help?</a>
+            <a href="<?php echo $root_directory; ?>">Blog</a>
+            <a href="<?php echo $root_directory; ?>">Need Help?</a>
         </div>
     </div>
 </div>
 
 <nav class="navbar navbar-expand-lg mainnav shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="../assets/img/logo1.png" alt="">
+        <a class="navbar-brand" href="<?php echo $root_directory; ?>">
+            <img src="<?php echo $root_directory; ?>/assets/img/logo1.png" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-chevron-down"></i>
@@ -60,16 +67,16 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     <?php
                     if (isset($_SESSION['roleId'])) {
-                        if (($_SESSION['roleId'] == 1)) {
-                            echo '<a href="/404.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        if ($_SESSION['roleId'] == 1) {
+                            echo '<a href="' . $root_directory . '/404.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
                         }
-                        if (($_SESSION['roleId'] == 2)) {
-                            echo '<a href="/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        if ($_SESSION['roleId'] == 2) {
+                            echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
                         }
                     } else {
-                        echo '<a href="/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';
+                        echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';
                     }
 
                     // Debugging: Output session information
@@ -85,19 +92,19 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./events/event-form.php">Events form</a>
+                    <a class="nav-link active" href="<?php echo $root_directory; ?>/events/event-form.php">Events form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./events/event-list.php">Events list</a>
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/events/event-list.php">Events list</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/top-volunteer.php">Top Volunteer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./top-volunteer.php">Top Volunteer</a>
-                </li>
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/comapnies.php">Companies</a>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="./comapnies.php">Companies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./profile/profile-edit.php">Account</a>
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/profile/profile-edit.php">Account</a>
                 </li>
             </ul>
 

@@ -2,8 +2,13 @@
 <?php
 session_start();
 ob_start();
+
+
+include('config.php');
+
+
 if (isset($_SESSION['roleId'])) {
-	header("Location: /profile/profile-edit.php");
+	header("Location: $root_directory/profile/profile-edit.php");
 	exit();
 }
 ?>
@@ -37,7 +42,7 @@ if (isset($_SESSION['roleId'])) {
 	include './includes/navbar.php';
 	include './conn.php';
 
-	
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Handle sign in
 		$emailAddress = $_POST["emailAddress"];
@@ -74,13 +79,13 @@ if (isset($_SESSION['roleId'])) {
 					echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
 					if ($user['roleId'] == 1) {
 						// navigate to company dashboard
-						header("Location: /dashboard/company-dashboard.php", true, 301);
+						header("Location: $root_directory/dashboard/company-dashboard.php", true, 301);
 						$script = "<script>window.location = '/dashboard/company-dashboard.php';</script>";
 						echo $script;
 						exit();
 					} else {
 						// navigate to volunteer dashboard
-						header("Location: /dashboard/dashboard.php", true, 301);
+						header("Location: $root_directory/dashboard/dashboard.php", true, 301);
 						$script = "<script>window.location = '/dashboard/dashboard.php';</script>";
 						echo $script;
 						exit();

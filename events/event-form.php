@@ -1,9 +1,14 @@
 <!-- let access if company -->
 <?php
+
+
 session_start();
 ob_start();
+
+include('../config.php');
+
 if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
-    header("Location: /404.php");
+    header("Location: $root_directory/404.php");
     exit();
 }
 ?>
@@ -40,12 +45,12 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
 
         if ($mysqli->query($sql) === TRUE) {
             $_SESSION['success_message'] = "Event Created.";
-            header("Location: /events/event-list.php");
+            header("Location: $root_directory/events/event-list.php");
             exit();
         } else {
             echo "Error: " . $sql . "<br>" . $mysqli->error;
             $_SESSION['error_message'] = "Event Not Created.";
-            header("Location: /events/event-list.php");
+            header("Location: $root_directory/events/event-list.php");
             exit();
         }
     }

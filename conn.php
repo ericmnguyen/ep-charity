@@ -11,10 +11,10 @@
 
 // FOR PRATIK
 
-$mysql_hostname = 'localhost';
-$mysql_username = 'root';
-$mysql_password = '';
-$mysql_dbname = 'ep_charity';
+// $mysql_hostname = 'localhost';
+// $mysql_username = 'root';
+// $mysql_password = '';
+// $mysql_dbname = 'ep_charity';
 
 
 
@@ -22,18 +22,18 @@ $mysql_dbname = 'ep_charity';
 
 // FOR PRATIK'S REMOTE DB SERVER
 
-// $mysql_hostname = 'localhost';
-// $mysql_username = '20634982';
-// $mysql_password = 'webtech1@#';
-// $mysql_dbname = 'db_20634982';
+$mysql_hostname = 'localhost';
+$mysql_username = '20634982';
+$mysql_password = 'webtech1@#';
+$mysql_dbname = 'db_20634982';
 
 
 
 
-$mysqli = mysqli_connect($mysql_hostname, $mysql_username, $mysql_password, $mysql_dbname)
-  or die(mysqli_connect_error());
+$mysqli = mysqli_connect($mysql_hostname, $mysql_username, $mysql_password, $mysql_dbname);
 
-# set encoding to match PHP script encoding
-mysqli_set_charset($mysqli, 'utf8');
 
-// printf("Host information: %s\n", mysqli_get_host_info($mysqli));
+// Check connection
+if ($mysqli->connect_error) {
+  die("Connection failed: " . $mysqli->connect_error);
+}

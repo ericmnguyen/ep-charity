@@ -2,8 +2,11 @@
 <?php
 session_start();
 ob_start();
+
+include('../config.php');
+
 if (isset($_SESSION['roleId'])) {
-	header("Location: /profile/profile-edit.php");
+	header("Location: $root_directory/profile/profile-edit.php");
 	exit();
 }
 ?>

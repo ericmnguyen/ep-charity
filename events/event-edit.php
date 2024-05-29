@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $eventStatus = $mysqli->real_escape_string($_POST['eventStatus']);
     $accountId = $_SESSION['accountId'];
 
-    $sqlUpdate = "UPDATE event SET 
+    $sqlUpdate = "UPDATE Event SET 
                     eventName = '$eventName',
                     description = '$description',
                     eventType = '$eventType',
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch existing event details
-$sqlEvent = "SELECT * FROM event WHERE eventId = '$eventId' AND accountId = '$accountId'";
+$sqlEvent = "SELECT * FROM Event WHERE eventId = '$eventId' AND accountId = '$accountId'";
 $resultEvent = $mysqli->query($sqlEvent);
 
 if ($resultEvent->num_rows > 0) {

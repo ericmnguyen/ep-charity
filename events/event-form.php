@@ -41,7 +41,7 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
         $eventStatus = $mysqli->real_escape_string($_POST['eventStatus']);
         $accountId = $_SESSION['accountId'];
 
-        $sql = "INSERT INTO event (eventName, description, eventType, startDate, endDate, startTime, endTime, venueName, address, locationType, maxAttendees, eventStatus, accountId) VALUES ('$eventName', '$description', '$eventType', '$startDate', '$endDate', '$startTime', '$endTime', '$venueName', '$address', '$locationType', '$maxAttendees', '$eventStatus', '$accountId')";
+        $sql = "INSERT INTO Event (eventName, description, eventType, startDate, endDate, startTime, endTime, venueName, address, locationType, maxAttendees, eventStatus, accountId) VALUES ('$eventName', '$description', '$eventType', '$startDate', '$endDate', '$startTime', '$endTime', '$venueName', '$address', '$locationType', '$maxAttendees', '$eventStatus', '$accountId')";
 
         if ($mysqli->query($sql) === TRUE) {
             $_SESSION['success_message'] = "Event Created.";

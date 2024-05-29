@@ -138,16 +138,16 @@ if (isset($_SESSION['roleId'])) {
 									</div>
 								</form>
 
-								<a href="./forgotpassword.php" class="forgot-password-link">Forgot password?</a>
+								<a href="<?php echo $root_directory; ?>" class="forgot-password-link">Forgot password?</a>
 
 								<p class="already-text">Create an account.
-									<a href="./register/signup-volunteer.php">Sign Up</a>
+									<a href="<?php echo $root_directory; ?>/register/signup-volunteer.php">Sign Up</a>
 								</p>
 
 
 								<p class="already-text">Do you want to add your Comapny Events here?
 									<br>
-									<a href="./register/signup-company.php">Create an Company Account</a>
+									<a href="<?php echo $root_directory; ?>/register/signup-company.php">Create an Company Account</a>
 								</p>
 
 

@@ -31,7 +31,7 @@ include('../config.php');
     include '../conn.php';
 
     $eventId = $_GET['eventId'];
-    $sqlEvent = "SELECT * FROM event WHERE eventId = '$eventId'";
+    $sqlEvent = "SELECT * FROM Event WHERE eventId = '$eventId'";
     $resultEvent = mysqli_query($mysqli, $sqlEvent);
 
     // Check for errors
@@ -197,7 +197,7 @@ include('../config.php');
                             ?>
                                     <div class="d-flex gap-3 mb-5 alert alert-dark">
                                         <h4 class="mr-4 mb-0"> Admin Actions: </h4>
-                                        <a href="/events/event-edit.php?eventId=<?php echo $eventId; ?>" class="btn btn-warning">EDIT</a>
+                                        <a href="<?php echo $root_directory; ?>/events/event-edit.php?eventId=<?php echo $eventId; ?>" class="btn btn-warning">EDIT</a>
                                         <button class="btn btn-danger">DELETE</button>
                                     </div>
                             <?php
@@ -320,7 +320,7 @@ include('../config.php');
                             <!-- social media and contact links -->
                             <ul class="list-inline mb-0 socials">
                                 <li class="list-inline-item mb-3">
-                                    <a class="text-primary text-lg" target="_blank" href=" <?php echo $website ?>">
+                                    <a class="text-primary text-lg" target="_blank" href="<?php echo $website ?>">
                                         <i class="fa me-2 fa-globe "></i> <?php echo $website ?>
                                     </a>
                                 </li>
@@ -390,7 +390,7 @@ include('../config.php');
                             } else {
                             ?>
                                 <div class="d-grid mb-4">
-                                    <a class="btn btn-main2" href="/signin.php">
+                                    <a class="btn btn-main2" href="<?php echo $root_directory; ?>/signin.php">
                                         Sign in to Apply
                                     </a>
                                 </div>

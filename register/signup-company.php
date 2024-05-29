@@ -171,10 +171,10 @@ if (isset($_SESSION['roleId'])) {
 
 								</form>
 
-								<a href="./forgotpassword.php" class="forgot-password-link">Forgot password?</a>
+								<a href="<?php echo $root_directory; ?>" class="forgot-password-link">Forgot password?</a>
 
 								<p class="already-text">Already have an account?
-									<a href="../signin.php">Sign In</a>
+									<a href="<?php echo $root_directory; ?>/signin.php">Sign In</a>
 								</p>
 
 

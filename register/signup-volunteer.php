@@ -3,7 +3,7 @@
 session_start();
 ob_start();
 
- include('../config.php');
+include('../config.php');
 
 if (isset($_SESSION['roleId'])) {
 	header("Location: $root_directory/profile/profile-edit.php");
@@ -159,14 +159,14 @@ if (isset($_SESSION['roleId'])) {
 
 								</form>
 
-								<a href="./forgotpassword.php" class="forgot-password-link">Forgot password?</a>
+								<a href="<?php echo $root_directory; ?>" class="forgot-password-link">Forgot password?</a>
 
 								<p class="already-text">Already have an account?
-									<a href="../signin.php">Sign In</a>
+									<a href="<?php echo $root_directory; ?>/signin.php">Sign In</a>
 								</p>
 
 								<p class="already-text">Do you want to add your Comapny Events here? <br>
-									<a href="./signup-company.php">Create an Company Account</a>
+									<a href="<?php echo $root_directory; ?>/signup-company.php">Create an Company Account</a>
 								</p>
 
 								<nav class="login-card-footer-nav">

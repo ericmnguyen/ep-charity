@@ -99,7 +99,7 @@
                                 </ul>
                                 <h2><?php echo $row['eventName']; ?></h2>
                                 <p><?php echo $row['description']; ?></p>
-                                <a href="/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
+                                <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                             </div>
                         </div>
                 <?php

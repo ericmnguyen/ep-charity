@@ -11,10 +11,10 @@
 
 // FOR PRATIK
 
-$mysql_hostname = 'localhost';
-$mysql_username = 'root';
-$mysql_password = '';
-$mysql_dbname = 'ep_charity';
+// $mysql_hostname = 'localhost';
+// $mysql_username = 'root';
+// $mysql_password = '';
+// $mysql_dbname = 'ep_charity';
 
 
 
@@ -22,10 +22,10 @@ $mysql_dbname = 'ep_charity';
 
 // FOR PRATIK'S REMOTE DB SERVER
 
-// $mysql_hostname = 'localhost';
-// $mysql_username = '20634982';
-// $mysql_password = 'webtech1@#';
-// $mysql_dbname = 'db_20634982';
+$mysql_hostname = 'localhost';
+$mysql_username = '20634982';
+$mysql_password = 'webtech1@#';
+$mysql_dbname = 'db_20634982';
 
 
 

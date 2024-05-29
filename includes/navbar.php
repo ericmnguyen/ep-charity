@@ -66,13 +66,13 @@ include('inc_config.php');
 
                     <?php
                     if (isset($_SESSION['roleId'])) {
-                        if ($_SESSION['roleId'] == 1) {
-                            echo '<a href="' . $root_directory . '/404.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        if ($_SESSION['roleId'] == 1) { //company
+                            echo '<a href="' . $root_directory . '/company/company-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
-                        if ($_SESSION['roleId'] == 2) {
-                            echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa fa-trash"><span>!</span></i></a>';
+                        if ($_SESSION['roleId'] == 2) { //volunteer
+                            echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
                     } else {
                         echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';

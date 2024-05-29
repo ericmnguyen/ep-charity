@@ -56,7 +56,7 @@ include('../config.php');
         $maxAttendees = $rowEvent['maxAttendees'];
         $createdAt = $rowEvent['createdAt'];
         $eventStatus = $rowEvent['eventStatus'];
-        $accountId = $rowEvent['accountId'];
+        $accountId = $rowEvent['accountId']; //event's account ID
     } else {
         die("No Event found.");
     }
@@ -112,13 +112,13 @@ include('../config.php');
     $accountEventStatus = '';
 
     if (isset($_SESSION['accountId']) && isset($_GET['eventId'])) {
-        $accountId = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
+        $accountIdForVolunteer = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
         $eventId = mysqli_real_escape_string($mysqli, $_GET['eventId']);
 
         $sql = "SELECT accountEventStatus FROM accountevent WHERE accountId = ? AND eventId = ?";
         $stmt = $mysqli->prepare($sql);
 
-        $stmt->bind_param("ii", $accountId, $eventId);
+        $stmt->bind_param("ii", $accountIdForVolunteer, $eventId);
         $stmt->execute();
         $stmt->bind_result($accountEventStatus);
         $stmt->fetch();
@@ -128,15 +128,14 @@ include('../config.php');
         $stmt->close();
     }
 
-
     ?>
 
 
 
+    <!-- volunteer apply event -->
     <?php
     include '../conn.php';
     $currentURL = $_SERVER['REQUEST_URI'];
-
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eventSubmitBtn"])) {
         $eventIdApply = $_POST["eventId"];
@@ -165,9 +164,6 @@ include('../config.php');
         $stmt->close();
     }
 
-
-
-
     ?>
 
 
@@ -190,6 +186,7 @@ include('../config.php');
                         <div class="row">
 
                             <h1><?php echo $eventName ?></h1>
+
 
                             <?php
                             if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
@@ -478,11 +475,12 @@ include('../config.php');
                                                 <input type='hidden' name='deleteComment' value=" . $row["reviewId"] . " />
                                                 <h5 class='card-title'>" . $row["firstName"] . " " . $row["lastName"] . "</h5>
                                                 <p class='card-text'>" . $row["message"] . "</p>
-                                                <sub>" . $row["createdAt"] . "</sub>
+                                                
                                                 <div>";
-                                    if ($accountId == $row["accountId"] || $_SESSION['roleId'] == 1) {
+                                    // if ($accountId == $row["accountId"] || $_SESSION['roleId'] == 1) {
+                                    if ($accountId == $row["accountId"]) {
                                         // handle show remove button
-                                        echo "<button type='submit'><i class='fa fa-trash'></i></button>";
+                                        echo "<button type='submit' class='btn btn-sm btn-danger pt-2'><i class='fa fa-trash'></i></button>";
                                     }
                                     echo "</div>
                                             </div>

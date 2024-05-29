@@ -5,9 +5,8 @@
 
     if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] != 2) ) {
         echo ($_SESSION['roleId']);
-        echo ('roleId');
-        header("Location: $root_directory/404.php");
-        // echo "<script>location.href = '/404.php';</script>";
+        // header("Location: $root_directory/404.php");
+        echo "<script>location.href = '$root_directory/404.php';</script>";
         exit();
     }
 

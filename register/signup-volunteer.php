@@ -24,11 +24,13 @@ if (isset($_SESSION['roleId'])) {
 				validateName("#lastName");
 				validateEmail();
 				validatePassword();
+				validateContactNumber();
 				validateDate("#dob");
 				const isValidForm = validateName("#firstName") &&
 					validateName("#lastName") &&
 					validateEmail() &&
 					validateDate("#dob") &&
+					validateContactNumber() &&
 					validatePassword();
 				if (isValidForm) {
 					return true;
@@ -126,7 +128,7 @@ if (isset($_SESSION['roleId'])) {
 									<div class="form-group col-lg-6 pr-lg-3">
 										<label for="contactNumber">Contact number</label>
 										<input type="number" name="contactNumber" id="contactNumber" class="form-control" placeholder="04********">
-										<small id="contactNumberCheck">This field is required</small>
+										<small id="contactNumberCheck">This field is invalid</small>
 									</div>
 									<div class="form-group col-lg-6">
 										<label for="email">Email</label>

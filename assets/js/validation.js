@@ -33,7 +33,7 @@ function validatePassword() {
   $("#reenterPasswordCheck").hide();
   $("#passwordCheck").html('This field is required.');
   $("#reenterPasswordCheck").html('This field is required.');
-  if(!password) {
+  if (!password) {
     $("#password").addClass("error");
     $("#passwordCheck").show();
   } else if (password.length < 8) {
@@ -45,7 +45,7 @@ function validatePassword() {
     $("#passwordCheck").hide();
     passwordValid = true;
   }
-  if(!rePassword) {
+  if (!rePassword) {
     $("#reenter-password").addClass("error");
     $("#reenterPasswordCheck").show();
   } else if (password !== rePassword) {
@@ -58,6 +58,21 @@ function validatePassword() {
     rePasswordValid = true;
   }
   return passwordValid && rePasswordValid;
+};
+
+function validateContactNumber() {
+  let contactNumber = $("#contactNumber").val();
+
+  let regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if (regex.test(contactNumber)) {
+    $("#contactNumber").removeClass("error");
+    $("#contactNumberCheck").hide();
+    return true;
+  } else {
+    $("#contactNumber").addClass("error");
+    $("#contactNumberCheck").show();
+  }
+  return false;
 };
 
 function validateDate(id) {

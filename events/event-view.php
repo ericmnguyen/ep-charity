@@ -359,9 +359,8 @@ if (!isset($_GET['eventId'])) {
                                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?eventId=' . $eventId; ?>">
                                                     <div class="modal-body">
 
-
-                                                    Please click Confirm to be added to the Volunteer list for this event.
-
+                                                        <div>Do you want to apply for this event?  <br>
+                                                            Please click Confirm to be added to the Volunteer list for this event</div>
                                                         <input type="hidden" name="eventId" value="<?php echo $eventId ?>">
                                                         <input type="hidden" name="accountId" value=" <?php echo $_SESSION['accountId'] ?>">
 
@@ -414,7 +413,7 @@ if (!isset($_GET['eventId'])) {
                                 if (!isset($rating)) {
                                     $rating = 5;
                                 }
-                                $add_comment_query = "INSERT INTO Review(eventId, accountId, rating, message) VALUES ($eventId, $accountId, $rating, '$comment')";
+                                $add_comment_query = "INSERT INTO Review(eventId, accountId, rating, message) VALUES ($eventId, " . $_SESSION['accountId'] . ", $rating, '$comment')";
                                 $add_comment_response = mysqli_query($mysqli, $add_comment_query);
                                 if (!$add_comment_response) {
                                     die(mysqli_connect_error());
@@ -473,8 +472,8 @@ if (!isset($_GET['eventId'])) {
                                                 <p class='card-text'>" . $row["message"] . "</p>
                                                 
                                                 <div>";
-                                    // if ($accountId == $row["accountId"] || $_SESSION['roleId'] == 1) {
-                                    if ($accountId == $row["accountId"]) {
+                                    // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
+                                    if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button
                                         echo "<button type='submit' class='btn btn-sm btn-danger pt-2'><i class='fa fa-trash'></i></button>";
                                     }

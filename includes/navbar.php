@@ -50,7 +50,7 @@ include('inc_config.php');
 
 <nav class="navbar navbar-expand-lg mainnav shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo $root_directory; ?>">
+        <a class="navbar-brand" href="<?php echo $root_directory; ?>/">
             <img src="<?php echo $root_directory; ?>/assets/img/logo1.png" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,14 +68,14 @@ include('inc_config.php');
                     if (isset($_SESSION['roleId'])) {
                         if ($_SESSION['roleId'] == 1) { //company
                             echo '<a href="' . $root_directory . '/company/company-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa-solid fa-right-from-bracket"></i></a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
                         if ($_SESSION['roleId'] == 2) { //volunteer
                             echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
-                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Events"><i class="fa-solid fa-right-from-bracket"></i></a>';
+                            echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
                     } else {
-                        echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Account"><i class="fa fa-user"><span>!</span> </i> </a>';
+                        echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in"><i class="fa fa-user"><span>!</span> </i> </a>';
                     }
 
                     // Debugging: Output session information
@@ -90,20 +90,25 @@ include('inc_config.php');
                 </div>
             </div>
             <ul class="navbar-nav">
+
+
+
+
+                <?php
+                if (isset($_SESSION['roleId'])) {
+                    if ($_SESSION['roleId'] == 1) { //company
+                        echo '<li class="nav-item"><a class="nav-link active" href="' . $root_directory . '/events/event-form.php">Add Events</a> </li>';
+                    }
+                }
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?php echo $root_directory; ?>/events/event-form.php">Events form</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $root_directory; ?>/events/event-list.php">Events list</a>
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/events/event-list.php">Events</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="<?php echo $root_directory; ?>/top-volunteer.php">Top Volunteer</a>
-                </li>
+                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $root_directory; ?>/comapnies.php">Companies</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $root_directory; ?>/profile/profile-edit.php">Account</a>
+                    <a class="nav-link" href="<?php echo $root_directory; ?>/company/company-list.php">Our Companies</a>
                 </li>
             </ul>
 

@@ -4,3 +4,4 @@ session_destroy();
 include('./config.php');
 
 header('Refresh: 2; URL = '.$root_directory.'/signin.php');
+$_SESSION['success_message'] = "Sign In Successful.";

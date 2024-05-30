@@ -6,10 +6,10 @@ include('../config.php');
 
 
 // Ensure no output before the headers are sent
-// if (!isset($_GET['eventId'])) {
-//     header("Location: $root_directory/events/event-list.php");
-//     exit;
-// }
+if (!isset($_GET['eventId'])) {
+    header("Location: $root_directory/events/event-list.php");
+    exit;
+}
 ?>
 
 
@@ -115,7 +115,7 @@ include('../config.php');
         $accountIdForVolunteer = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
         $eventId = mysqli_real_escape_string($mysqli, $_GET['eventId']);
 
-        $sql = "SELECT accountEventStatus FROM accountevent WHERE accountId = ? AND eventId = ?";
+        $sql = "SELECT accountEventStatus FROM AccountEvent WHERE accountId = ? AND eventId = ?";
         $stmt = $mysqli->prepare($sql);
 
         $stmt->bind_param("ii", $accountIdForVolunteer, $eventId);
@@ -123,7 +123,7 @@ include('../config.php');
         $stmt->bind_result($accountEventStatus);
         $stmt->fetch();
 
-        echo $accountEventStatus;
+        // echo $accountEventStatus;
 
         $stmt->close();
     }
@@ -141,14 +141,14 @@ include('../config.php');
         $eventIdApply = $_POST["eventId"];
         $accountIdApply = $_POST["accountId"];
 
-        $sql = "INSERT INTO accountevent (eventId, accountId, accountEventStatus) VALUES (?, ?, 'Applied')";
+        $sql = "INSERT INTO AccountEvent (eventId, accountId, accountEventStatus) VALUES (?, ?, 'Applied')";
         $stmt = $mysqli->prepare($sql);
 
         $stmt->bind_param("ii", $eventIdApply, $accountIdApply);
 
         // Execute statement
         if ($stmt->execute() === TRUE) {
-            $_SESSION['success_message'] = "asdasd Created.";
+            $_SESSION['success_message'] = "You have been added to the event. Please check your profile for more information";
             echo "Record inserted successfully";
             echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply  . ' ' . $_GET['eventId'] . ', Account ID: ' . $accountIdApply . '");</script>';
             // header("Location: $currentURL");
@@ -173,10 +173,6 @@ include('../config.php');
 
 
     <main class="container">
-
-
-
-
         <div class="event-container">
             <div class="row">
                 <div class="col-lg-8">
@@ -355,7 +351,7 @@ include('../config.php');
 
                                     <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <div class="modal-content">
+                                            <div class="modal-content rounded-0">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="applyModalLabel">Quick Apply</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -364,12 +360,14 @@ include('../config.php');
                                                     <div class="modal-body">
 
 
+                                                    Please click Confirm to be added to the Volunteer list for this event.
+
                                                         <input type="hidden" name="eventId" value="<?php echo $eventId ?>">
                                                         <input type="hidden" name="accountId" value=" <?php echo $_SESSION['accountId'] ?>">
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" name="eventSubmitBtn" class="btn btn-primary">Confirm</button>
+                                                        <button type="submit" name="eventSubmitBtn" class="btn btn-main2">Confirm</button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </form>
@@ -403,7 +401,6 @@ include('../config.php');
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12">
                     <div class="card rounded-0">
                         <div class="card-header">
@@ -446,7 +443,6 @@ include('../config.php');
                         ?>
 
                     </div>
-
                     <div class="conatiner bg-white">
                         <div class="row p-3">
                             <?php
@@ -492,23 +488,18 @@ include('../config.php');
                                 echo "No comments.";
                             }
                             ?>
-                            <!-- <div class="col-md-12 mb-2">
-                                <div class="card rounded-0 border-top-0 border-start-0 border-end-0 ">
-                                    <div class="card-body ">
-                                        <h5 class="card-title">Fname Lane says: </h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex veritatis, vitae accusantium corrupti earum tenetur tempora iste natus reprehenderit architecto neque delectus voluptatibus ut, similique doloribus ullam temporibus. Laudantium, repudiandae!</p>
-                                        <sub>date ne</sub>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </main>
+
+    <div class="container ">
+        <a href="<?php echo $root_directory; ?>/events/event-list.php" class="backbtn ms-3">
+            <i class="fa-solid fa-circle-arrow-left"></i> <span>See all events</span>
+        </a>
+    </div>
 
 
 

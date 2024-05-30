@@ -17,22 +17,8 @@ session_start();
 
     <?php include '../includes/navbar.php' ?>
 
-    <?php
-    // Check if success message is set and display it
-    if (isset($_SESSION['success_message'])) {
-        echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">';
-        echo '<strong>Nice!</strong> ' . $_SESSION["success_message"] . ' ';
-        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
-        unset($_SESSION['success_message']);
-    }
-    if (isset($_SESSION['error_message'])) {
-        echo '<div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">';
-        echo '<strong>Opps!</strong> ' . $_SESSION["error_message"] . ' ';
-        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
-        unset($_SESSION['error_message']);
-    }
 
-    ?>
+    <?php include '../includes/alert.php' ?>
 
 
     <?php
@@ -53,8 +39,8 @@ session_start();
             <div class="event-search">
                 <div class="row">
                     <h4>SEARCH</h4>
-                    <form action="" method="get">
-                        <div class="col-12 col-md-5">
+                    <form action="" method="get" class="row border-0">
+                        <div class="col-12 col-md-7">
                             <div class="input-group">
                                 <span class="input-group-text" id="text">
                                     <i class="fas fa-map-marker-alt"></i>
@@ -70,12 +56,12 @@ session_start();
                                 <input name="startDate" type="date" class="form-control" placeholder="date" aria-label="date" aria-describedby="date">
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-1">
                             <div class="input-group">
                                 <button type="submit" class="btn ms-2 btn-main"> <i class="fa fa-search"></i> </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12 d-flex justify-content-end">
+                        <div class="col-12 col-md-1 d-flex justify-content-end">
                             <button class="btn btn-link btn-sm">Reset</button>
                         </div>
                     </form>
@@ -93,7 +79,7 @@ session_start();
                 //         WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
                 //         AND startDate LIKE'%$startDate%' AND accountId=$accountId";
                 // } else {
-                    $sql = "SELECT * FROM Event 
+                $sql = "SELECT * FROM Event 
                         WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
                         AND startDate LIKE'%$startDate%'";
                 // }

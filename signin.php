@@ -40,6 +40,7 @@ if (isset($_SESSION['roleId'])) {
 
 	<?php
 	include './includes/navbar.php';
+	include './includes/alert.php';
 	include './conn.php';
 
 
@@ -79,19 +80,26 @@ if (isset($_SESSION['roleId'])) {
 					echo $_SESSION['accountId'] . $_SESSION['emailAddress'] . $_SESSION['roleId'];
 					if ($user['roleId'] == 1) {
 						// navigate to company dashboard
-						header("Location: $root_directory/dashboard/company-dashboard.php", true, 301);
-						$script = "<script>window.location = '/dashboard/company-dashboard.php';</script>";
+						header("Location: $root_directory/", true, 301);
+						$script = "<script>window.location = '/';</script>";
+						// header("Location: $root_directory/company/company-edit.php", true, 301);
+						// $script = "<script>window.location = '/company/company-edit.php';</script>";
+						$_SESSION['success_message'] = "Sign In Successful.";
 						echo $script;
 						exit();
 					} else {
 						// navigate to volunteer dashboard
-						header("Location: $root_directory/dashboard/dashboard.php", true, 301);
-						$script = "<script>window.location = '/dashboard/dashboard.php';</script>";
+						$_SESSION['success_message'] = "Sign In Successful.";
+						header("Location: $root_directory/", true, 301);
+						$script = "<script>window.location = '/';</script>";
+						// header("Location: $root_directory/profile/profile-edit.php", true, 301);
+						// $script = "<script>window.location = '/profile/profile-edit.php';</script>";
 						echo $script;
 						exit();
 					}
 				}
 			} else {
+				$_SESSION['error_message'] = "Opps! Something went wrong.";
 				echo '<div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">';
 				echo '<strong>Opps!</strong> Invalid Credentials. Please try again.';
 				echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';

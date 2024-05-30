@@ -69,7 +69,7 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
         <div class="form-container">
 
             <h1>
-                CREATE EVENT <?php echo $_SESSION['accountId']; ?>
+                CREATE EVENT 
             </h1>
             <form id="eventForm" class="row form-content" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="form-floating">

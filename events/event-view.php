@@ -338,8 +338,11 @@ if (!isset($_GET['eventId'])) {
 
                             <?php
                             if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
+                                // handle volunteers who did apply
                                 if ($accountEventStatus == "Applied") {
-                                    echo ' <a class="btn btn-success disabled">Applied</a>';
+                                    echo ' <a class="btn btn-warning disabled">Applied</a>';
+                                } else if ($accountEventStatus == "Approved") {
+                                    echo ' <a class="btn btn-success disabled">Approved</a>';
                                 } else {
                             ?>
 
@@ -375,13 +378,20 @@ if (!isset($_GET['eventId'])) {
                                     </div>
                                 <?php
                                 }
+                            } 
+                            elseif (isset($_SESSION['accountId']) == $accountId) {
+                                // handle event host
+                                echo "<a class='btn btn-main2' href='./applicants.php?eventId=".$eventId."'>See applicant list</a>";
+
                             } elseif (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
+                                // handle other commpany
                                 ?>
                                 <div class="d-grid mb-4">
                                     Company Account cannot apply. User your volunteer account.
                                 </div>
                             <?php
                             } else {
+                                // handle guests
                             ?>
                                 <div class="d-grid mb-4">
                                     <a class="btn btn-main2" href="<?php echo $root_directory; ?>/signin.php">
@@ -470,12 +480,14 @@ if (!isset($_GET['eventId'])) {
                                                 <input type='hidden' name='deleteComment' value=" . $row["reviewId"] . " />
                                                 <h5 class='card-title'>" . $row["firstName"] . " " . $row["lastName"] . "</h5>
                                                 <p class='card-text'>" . $row["message"] . "</p>
-                                                
+                                                <sub>" . $row["createdAt"] . "</sub>
+
                                                 <div>";
+                                            // TODO: add date
                                     // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
                                     if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button
-                                        echo "<button type='submit' class='btn btn-sm btn-danger pt-2'><i class='fa fa-trash'></i></button>";
+                                        echo "<button type='submit' class='btn btn-sm btn-danger mt-3 pt-2'><i class='fa fa-trash'></i></button>";
                                     }
                                     echo "</div>
                                             </div>

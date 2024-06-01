@@ -80,7 +80,7 @@ CREATE TABLE `Event` (
     locationType ENUM('In-Person', 'Online', 'Hybrid') NOT NULL,
     maxAttendees INT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    eventStatus ENUM('Published', 'Ongoing', 'Finished') DEFAULT 'Published' NOT NULL,
+    eventStatus ENUM('Published', 'Finished') DEFAULT 'Published' NOT NULL,
 
     accountId INT NOT NULL, 
 

@@ -339,7 +339,9 @@ if (!isset($_GET['eventId'])) {
                             <?php
                             if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
                                 // handle volunteers who did apply
-                                if ($accountEventStatus == "Applied") {
+                                if ($eventStatus == "Finished") {
+                                    echo '<a class="btn btn-secondary disabled">Closed</a>';
+                                } else if ($accountEventStatus == "Applied") {
                                     echo ' <a class="btn btn-warning disabled">Applied</a>';
                                 } else if ($accountEventStatus == "Approved") {
                                     echo ' <a class="btn btn-success disabled">Approved</a>';

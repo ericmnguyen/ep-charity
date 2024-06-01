@@ -164,7 +164,7 @@ if (isset($_SESSION['roleId'])) {
 								</p>
 
 								<p class="already-text">Do you want to add your Comapny Events here? <br>
-									<a href="<?php echo $root_directory; ?>/signup-company.php">Create an Company Account</a>
+									<a href="<?php echo $root_directory; ?>/register/signup-company.php">Create an Company Account</a>
 								</p>
 
 								<nav class="login-card-footer-nav">

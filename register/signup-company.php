@@ -55,14 +55,10 @@ if (isset($_SESSION['roleId'])) {
 		$lastName = $_POST["lastName"];
 		$contactNumber = $_POST["contactNumber"];
 		$website = $_POST["website"];
-		// echo $companyName . $emailAddress . $password . $website . "---";
-		// echo $_POST['randcheck'] . "---";
-		// echo $_SESSION['rand'];
 		// Register Handling
 		if ($_POST['randcheck'] == $_SESSION['rand']) {
 			// hash password
 			$hashPassword = password_hash($password, PASSWORD_BCRYPT);
-			// echo "---hash: " . $hashPassword;
 			// DB Query
 			// Check if email already exists
 			$check_email_exist_query = "SELECT * FROM Account WHERE emailAddress='$emailAddress'";

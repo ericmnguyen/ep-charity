@@ -18,20 +18,9 @@ include('../config.php');
 <head>
   <?php include '../includes/header.php' ?>
   <script>
-    // function onClickHire(accountId) {
-    //   alert(accountId);
-    //   $.ajax({
-    //     type: "POST",
-    //     url: 'attendee-list.php',
-    //     data: {
-    //       accountId
-    //     },
-    //     success: function(html) {
-    //       alert(html);
-    //     }
-
-    //   });
-    // }
+    function handleOnClick(eventId) {
+      window.location.replace('./event-view.php?eventId=' + eventId);
+    }
   </script>
 </head>
 
@@ -40,32 +29,32 @@ include('../config.php');
   include '../includes/navbar.php';
   include '../conn.php';
   ?>
-  <div class="container">
-    <h1>Applicant list</h1>
-    <?php
-    $eventId = $_GET['eventId'];
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hireBtn']) && $_POST['randcheck'] == $_SESSION['rand']) {
-      // Handle approve applicants
-      $applicantAccountId = $_POST['accountId'];
-      $approve_query = "UPDATE AccountEvent SET accountEventStatus='Approved' WHERE accountId=$applicantAccountId AND eventId=$eventId";
-      $approve_response = mysqli_query($mysqli, $approve_query);
-      if (!$approve_response) {
-        die(mysqli_connect_error());
-      }
+  <?php
+  $eventId = $_GET['eventId'];
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['hireBtn']) && $_POST['randcheck'] == $_SESSION['rand']) {
+    // Handle approve applicants
+    $applicantAccountId = $_POST['accountId'];
+    $approve_query = "UPDATE AccountEvent SET accountEventStatus='Approved' WHERE accountId=$applicantAccountId AND eventId=$eventId";
+    $approve_response = mysqli_query($mysqli, $approve_query);
+    if (!$approve_response) {
+      die(mysqli_connect_error());
     }
+  }
 
-    // Handle get applicant list
-    $attendee_list_query = "SELECT Account.accountId, Account.emailAddress, Account.firstName, Account.lastName, Account.contactNumber,
+  // Handle get applicant list
+  $attendee_list_query = "SELECT Account.accountId, Account.emailAddress, Account.firstName, Account.lastName, Account.contactNumber,
                         AccountEvent.*
                         FROM AccountEvent, Account
                         WHERE AccountEvent.accountId = Account.accountId AND AccountEvent.eventId = $eventId";
-    $attendee_list_response = mysqli_query($mysqli, $attendee_list_query);
+  $attendee_list_response = mysqli_query($mysqli, $attendee_list_query);
 
-    if (!$attendee_list_response) {
-      die(mysqli_connect_error());
-    }
-    ?>
-
+  if (!$attendee_list_response) {
+    die(mysqli_connect_error());
+  }
+  ?>
+  <div class="container">
+    <button name='backBtn' class='btn btn-main2' onclick="handleOnClick(<?php echo $eventId; ?>);">Back</button>
+    <h1>Applicant list</h1>
     <table class="table table-bordered">
       <thead>
         <tr>

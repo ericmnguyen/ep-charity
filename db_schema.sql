@@ -32,7 +32,7 @@ CREATE TABLE `Staff` (
 	staffId INT NOT NULL AUTO_INCREMENT,
 	address VARCHAR(255),
   dateOfBirth DATE,
-  gender VARCHAR(10) ,
+  gender VARCHAR(10),
   skills VARCHAR(255),
   interests VARCHAR(255),
   recognition VARCHAR(255),

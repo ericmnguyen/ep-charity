@@ -146,7 +146,7 @@ if (isset($_SESSION['roleId'])) {
 										<small id="reenterPasswordCheck">This field is required</small>
 									</div>
 									<div class="form-group col-lg-12">
-										<label for="Birthday">Birthday</label>
+										<label for="dob">Date of Birthday</label>
 										<input type="date" name="dob" id="dob" class="form-control">
 										<small id="dobCheck">This field is required</small>
 									</div>

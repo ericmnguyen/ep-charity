@@ -44,7 +44,7 @@
                                         $accountId = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
 
                                         // $sql = "SELECT event.* FROM accountevent JOIN event ON accountevent.eventId = event.eventId WHERE accountevent.accountId = $accountId AND accountevent.accountEventStatus = 'Applied'  AND event.eventStatus = 'Finished'";
-                                        $sql = "SELECT Event.* FROM AccountEvent JOIN Event ON AccountEvent.eventId = Event.eventId WHERE AccountEvent.accountId = $accountId AND AccountEvent.accountEventStatus = 'Applied' AND Event.eventStatus = 'Finished'";
+                                        $sql = "SELECT Event.* FROM AccountEvent JOIN Event ON AccountEvent.eventId = Event.eventId WHERE AccountEvent.accountId = $accountId AND AccountEvent.accountEventStatus = 'Approved' AND Event.eventStatus = 'Finished'";
 
                                         $result = mysqli_query($mysqli, $sql);
 

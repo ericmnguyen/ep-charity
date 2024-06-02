@@ -17,14 +17,14 @@
                   <h2>Company Events</h2>
               </li>
               <li class="nav-item activeNo">
-                  <a href="<?php echo $root_directory; ?>/company/company-events-past.php" class="nav-link activeNo">
+                  <a href="<?php echo $root_directory; ?>/company/company-past-events.php" class="nav-link activeNo">
                       <i class="fa fa-cubes"></i>
                       Past Events </a>
               </li>
               <li class="nav-item">
-                  <a href="<?php echo $root_directory; ?>/company/company-events-current.php" class="nav-link ">
+                  <a href="<?php echo $root_directory; ?>/company/company-current-events.php" class="nav-link ">
                       <i class="fa fa-cubes"></i>
-                      Applied Events </a>
+                      Current Events </a>
               </li>
 
               <li class="nav-title">

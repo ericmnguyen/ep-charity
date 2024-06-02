@@ -17,6 +17,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <?php
 include('inc_config.php');
+$searchText = $_GET['searchText'];
+if (isset($_GET['searchBtn']) && $_SERVER["REQUEST_METHOD"] == "GET") {
+    header("Location: $root_directory/events/event-list.php?searchText=" . $searchText);
+	exit();
+}
 ?>
 
 <div class="topbar">
@@ -58,9 +63,9 @@ include('inc_config.php');
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="upper">
-                <form class="search-bar-nav">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                <form action="" method="get" class="search-bar-nav">
+                    <input class="form-control" name="searchText" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn" name="searchBtn" type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 <div class="user-nav-btn">
 

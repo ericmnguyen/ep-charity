@@ -79,9 +79,9 @@ session_start();
                 //         WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
                 //         AND startDate LIKE'%$startDate%' AND accountId=$accountId";
                 // } else {
-                $sql = "SELECT * FROM Event 
-                        WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%') 
-                        AND startDate LIKE'%$startDate%'";
+                $sql = "SELECT * FROM Event, Company
+                        WHERE (eventName LIKE '%$searchText%' OR eventType LIKE '%$searchText%' OR address LIKE '%$searchText%' OR companyName LIKE '%$searchText%') 
+                        AND startDate LIKE'%$startDate%' AND Event.accountId = Company.accountId";
                 // }
                 $result = mysqli_query($mysqli, $sql);
 

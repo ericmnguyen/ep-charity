@@ -96,7 +96,7 @@ if (isset($_SESSION['roleId'])) {
 			<div class="container-box">
 				<div class="row">
 					<div class="col-lg-5 bg">
-						<h6 class="card-title">SIGN UP<br> <span>Social Volunteer</span></h6>
+						<h6 class="card-title">SIGN UP<br> <span>Social Volunteering</span></h6>
 						</h6>
 
 						<p> Register for an account with us and become one of our members.

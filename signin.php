@@ -115,7 +115,7 @@ if (isset($_SESSION['roleId'])) {
 			<div class="container-box">
 				<div class="row">
 					<div class="col-lg-5 bg">
-						<h6 class="card-title">SIGN IN TO <br> <span>Social Volunteer</span></h6>
+						<h6 class="card-title">SIGN IN TO <br> <span>Social Volunteering</span></h6>
 
 						<p>
 							Welcome, <br><br>

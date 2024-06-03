@@ -29,8 +29,8 @@
               <!-- edit account -->
 
               <div class="content-title">
-                <h2>Published Events</h2>
-                <h4>Active Events</h4>
+                <h2>Company Events</h2>
+                <h4>Current Events</h4>
               </div>
 
 

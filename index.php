@@ -68,7 +68,7 @@
                     <?php
                     require_once './conn.php';
 
-                    $sql = "SELECT * FROM Event,Company WHERE Event.accountId = Company.accountId";
+                    $sql = "SELECT * FROM Event,Company WHERE Event.eventStatus != 'Finished' AND Event.accountId = Company.accountId";
                     $result = mysqli_query($mysqli, $sql);
 
                     if (mysqli_num_rows($result) > 0) {

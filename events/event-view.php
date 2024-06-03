@@ -342,16 +342,16 @@ if (!isset($_GET['eventId'])) {
                                 if ($eventStatus == "Finished") {
                                     echo '<a class="btn btn-secondary disabled">Closed</a>';
                                 } else if ($accountEventStatus == "Applied") {
-                                    echo ' <a class="btn btn-warning disabled">Applied</a>';
+                                    echo ' <a class="btn btn-warning disabled">Applied. Waiting for Approval</a>';
                                 } else if ($accountEventStatus == "Approved") {
                                     echo ' <a class="btn btn-success disabled">Approved</a>';
                                 } else {
                             ?>
 
                                     <div class="d-grid mb-4">
-                                        <a class="btn btn-main2" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
+                                        <button class="btn btn-main2" type="button" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
                                             Apply Now
-                                        </a>
+                                        </buton>
                                     </div>
 
                                     <div class="modal" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
@@ -459,7 +459,7 @@ if (!isset($_GET['eventId'])) {
                                 }
                             }
                             $comment_list_query = "SELECT Review.*, Account.firstName, Account.lastName 
-                            FROM ep_charity.Review, Account
+                            FROM Review, Account
                             WHERE eventId=$eventId AND Account.accountId = Review.accountId";
                             $comment_list_response = $mysqli->query($comment_list_query);
                             if (!$comment_list_response) {

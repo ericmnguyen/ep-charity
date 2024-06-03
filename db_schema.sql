@@ -1,9 +1,9 @@
 START TRANSACTION;
-DROP DATABASE IF EXISTS ep_charity;
+-- DROP DATABASE IF EXISTS ep_charity;
 -- Create the database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS ep_charity;
+CREATE DATABASE IF NOT EXISTS db_22074118;
 
-USE ep_charity;
+USE db_22074118;
 --
 -- CREATE TABLES
 --
@@ -133,17 +133,17 @@ ADD FOREIGN KEY (accountId) REFERENCES Account(accountId);
 --
 -- Role
 INSERT INTO `Role`(`roleName`) VALUES('company'), ('staff');
--- events of commbank
-INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
-`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
-VALUES('Event name', 'this is description', 'Type', '2024/05/16', '2024/05/17', '06:00:00', '22:00:00', 'ICC',
-'5 Smith St, NSW', 'In-person', 20, 2);
-INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
-`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
-VALUES('Event 2 bla', 'blablbalblab', 'conf', '2024/07/16', '2024/07/17', '06:00:00', '22:00:00', 'CBD',
-'65 Smith St, NSW', 'Online', 50, 2);
--- events of woolies group
-INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
-`venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
-VALUES('Event woolies', 'description woolies', 'catering', '2024/06/12', '2024/06/14', '06:00:00', '23:59:00', 'West Ryde',
-'10 David Rd, NSW', 'Hybrid', 50, 3);
+-- -- events of commbank
+-- INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+-- `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+-- VALUES('Event name', 'this is description', 'Type', '2024/05/16', '2024/05/17', '06:00:00', '22:00:00', 'ICC',
+-- '5 Smith St, NSW', 'In-person', 20, 2);
+-- INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+-- `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+-- VALUES('Event 2 bla', 'blablbalblab', 'conf', '2024/07/16', '2024/07/17', '06:00:00', '22:00:00', 'CBD',
+-- '65 Smith St, NSW', 'Online', 50, 2);
+-- -- events of woolies group
+-- INSERT INTO `Event`(`eventName`, `description`, `eventType`, `startDate`, `endDate`, `startTime`, `endTime`, 
+-- `venueName`, `address`, `locationType`, `maxAttendees`, `accountId`)
+-- VALUES('Event woolies', 'description woolies', 'catering', '2024/06/12', '2024/06/14', '06:00:00', '23:59:00', 'West Ryde',
+-- '10 David Rd, NSW', 'Hybrid', 50, 3);

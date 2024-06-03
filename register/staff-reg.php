@@ -16,7 +16,6 @@ if (isset($_SESSION['roleId'])) {
 <html lang="en">
 <?php
 $emailAddress = $_POST["emailAddress"];
-echo "email address ne: " . $emailAddress;
 ?>
 
 <head>

@@ -68,7 +68,7 @@ if (isset($_SESSION['roleId'])) {
 			} else if (mysqli_num_rows($email_exist_response) > 0) {
 				echo "<h3 class='text-danger'>Email exists. Please use another email.</h3>";
 			} else {
-				$register_query = "INSERT INTO ACCOUNT(emailAddress, password, firstName, lastName, contactNumber, roleId)
+				$register_query = "INSERT INTO Account(emailAddress, password, firstName, lastName, contactNumber, roleId)
 			VALUES ('" . $emailAddress . "', '" . $hashPassword . "', '" . $firstName . "', '" . $lastName . "', '" . $contactNumber . "', 2)";
 				$regis_response = mysqli_query($mysqli, $register_query);
 				if (!$regis_response) {

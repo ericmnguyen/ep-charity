@@ -68,7 +68,7 @@
                     <?php
                     require_once './conn.php';
 
-                    $sql = "SELECT * FROM Event";
+                    $sql = "SELECT * FROM Event WHERE Event.eventStatus != 'Finished'";
                     $result = mysqli_query($mysqli, $sql);
 
                     if (mysqli_num_rows($result) > 0) {

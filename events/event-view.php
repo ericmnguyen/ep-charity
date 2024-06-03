@@ -342,16 +342,16 @@ if (!isset($_GET['eventId'])) {
                                 if ($eventStatus == "Finished") {
                                     echo '<a class="btn btn-secondary disabled">Closed</a>';
                                 } else if ($accountEventStatus == "Applied") {
-                                    echo ' <a class="btn btn-warning disabled">Applied</a>';
+                                    echo ' <a class="btn btn-warning disabled">Applied. Waiting for Approval</a>';
                                 } else if ($accountEventStatus == "Approved") {
                                     echo ' <a class="btn btn-success disabled">Approved</a>';
                                 } else {
                             ?>
 
                                     <div class="d-grid mb-4">
-                                        <a class="btn btn-main2" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
+                                        <button class="btn btn-main2" type="button" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
                                             Apply Now
-                                        </a>
+                                        </buton>
                                     </div>
 
                                     <div class="modal" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
@@ -364,7 +364,7 @@ if (!isset($_GET['eventId'])) {
                                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?eventId=' . $eventId; ?>">
                                                     <div class="modal-body">
 
-                                                        <div>Do you want to apply for this event?  <br>
+                                                        <div>Do you want to apply for this event? <br>
                                                             Please click Confirm to be added to the Volunteer list for this event</div>
                                                         <input type="hidden" name="eventId" value="<?php echo $eventId ?>">
                                                         <input type="hidden" name="accountId" value=" <?php echo $_SESSION['accountId'] ?>">
@@ -380,11 +380,9 @@ if (!isset($_GET['eventId'])) {
                                     </div>
                                 <?php
                                 }
-                            } 
-                            elseif (isset($_SESSION['accountId']) == $accountId) {
+                            } elseif (isset($_SESSION['accountId']) == $accountId) {
                                 // handle event host
-                                echo "<a class='btn btn-main2' href='./applicants.php?eventId=".$eventId."'>See applicant list</a>";
-
+                                echo "<a class='btn btn-main2' href='./applicants.php?eventId=" . $eventId . "'>See applicant list</a>";
                             } elseif (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
                                 // handle other commpany
                                 ?>
@@ -485,7 +483,7 @@ if (!isset($_GET['eventId'])) {
                                                 <sub>" . $row["createdAt"] . "</sub>
 
                                                 <div>";
-                                            // TODO: add date
+                                    // TODO: add date
                                     // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
                                     if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button

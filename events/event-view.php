@@ -354,7 +354,7 @@ if (!isset($_GET['eventId'])) {
                                         </a>
                                     </div>
 
-                                    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+                                    <div class="modal" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content rounded-0">
                                                 <div class="modal-header">

@@ -59,6 +59,8 @@ if (isset($_SESSION['roleId']) != 2) {
 	$companyName = $staffData["companyName"];
 	$website = $staffData["website"];
 	$dateOfBirth = $staffData["dateOfBirth"];
+	$skills = $staffData["skills"];
+	$interests = $staffData["interests"];
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitBtn']) && $_POST['randcheck'] == $_SESSION['rand']) {
 		$emailAddress = $_POST["emailAddress"];
@@ -173,7 +175,7 @@ if (isset($_SESSION['roleId']) != 2) {
 									<div class="form-group row">
 										<label for="interests" class="col-sm-2 col-form-label">Interests</label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control" value="<?php echo $skills ?>" name="interests" id="interests" placeholder="Enter Your Interests">
+											<input type="text" class="form-control" value="<?php echo $interests ?>" name="interests" id="interests" placeholder="Enter Your Interests">
 										</div>
 									</div>
 									<!-- <div class="form-group row">

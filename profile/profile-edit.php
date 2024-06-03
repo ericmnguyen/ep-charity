@@ -67,13 +67,15 @@ if (isset($_SESSION['roleId']) != 2) {
 		$address = $_POST["address"];
 		$gender = $_POST["gender"];
 		$dateOfBirth = $_POST["dateOfBirth"];
+		$skills = $_POST["skills"];
+		$interests = $_POST["interests"];
 		$contactNumber = $_POST["contactNumber"];
 		$update_account_query = "UPDATE Account SET firstName='$firstName',lastName='$lastName', emailAddress='$emailAddress', contactNumber='$contactNumber' WHERE accountId='$accountId'";
 		$update_account_response = mysqli_query($mysqli, $update_account_query);
 		if (!$update_account_response) {
 			die(mysqli_connect_error());
 		}
-		$update_staff_query = "UPDATE Staff SET address='$address', dateOfBirth='$dateOfBirth', gender='$gender' WHERE accountId='$accountId'";
+		$update_staff_query = "UPDATE Staff SET address='$address', dateOfBirth='$dateOfBirth', gender='$gender', skills='$skills', interests='$interests' WHERE accountId='$accountId'";
 		$update_staff_response = mysqli_query($mysqli, $update_staff_query);
 		if (!$update_staff_response) {
 			die(mysqli_connect_error());
@@ -160,6 +162,18 @@ if (isset($_SESSION['roleId']) != 2) {
 												<option value="female">Female</option>
 												<option value="other">Other</option>
 											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="skills" class="col-sm-2 col-form-label">Skills</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" value="<?php echo $skills ?>" name="skills" id="skills" placeholder="Enter Your Skills">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="interests" class="col-sm-2 col-form-label">Interests</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" value="<?php echo $skills ?>" name="interests" id="interests" placeholder="Enter Your Interests">
 										</div>
 									</div>
 									<!-- <div class="form-group row">

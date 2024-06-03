@@ -22,10 +22,10 @@
 
 // FOR PRATIK'S REMOTE DB SERVER
 
-// $mysql_hostname = 'localhost';
-// $mysql_username = '20634982';
-// $mysql_password = 'webtech1@#';
-// $mysql_dbname = 'db_20634982';
+$mysql_hostname = 'localhost';
+$mysql_username = '20634982';
+$mysql_password = 'webtech1@#';
+$mysql_dbname = 'db_20634982';
 
 // FOR Eric'S REMOTE DB SERVER
 

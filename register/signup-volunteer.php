@@ -66,7 +66,7 @@ if (isset($_SESSION['roleId'])) {
 			if (!$email_exist_response) {
 				die(mysqli_connect_error());
 			} else if (mysqli_num_rows($email_exist_response) > 0) {
-				echo "<h3 class='text-danger'>Email exists. Please use another email.</h3>";
+				echo '<div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Opps!</strong> Email exists. Please use another email <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 			} else {
 				$register_query = "INSERT INTO Account(emailAddress, password, firstName, lastName, contactNumber, roleId)
 			VALUES ('" . $emailAddress . "', '" . $hashPassword . "', '" . $firstName . "', '" . $lastName . "', '" . $contactNumber . "', 2)";
@@ -74,7 +74,7 @@ if (isset($_SESSION['roleId'])) {
 				if (!$regis_response) {
 					die(mysqli_connect_error());
 				} else {
-					echo "<h3 class='text-success'>Registered successfully.</h3>";
+					echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> Registered successfully <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 				}
 
 				// insert more information
@@ -83,7 +83,7 @@ if (isset($_SESSION['roleId'])) {
 				if (!$insert_staff_response) {
 					die(mysqli_connect_error());
 				} else {
-					echo "<h3 class='text-success'>Staff added.</h3>";
+					echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> Company added <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 				}
 			}
 		}

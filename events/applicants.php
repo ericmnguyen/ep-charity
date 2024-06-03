@@ -52,44 +52,49 @@ include('../config.php');
     die(mysqli_connect_error());
   }
   ?>
-  <div class="container">
-    <button name='backBtn' class='btn btn-main2' onclick="handleOnClick(<?php echo $eventId; ?>);">Back</button>
-    <h1>Applicant list</h1>
-    <table class="table table-bordered">
-      <thead>
+  <div class="container my-5">
+    <h1>Manage Application Lists</h1>
+    <div class="form-container">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            if ($attendee_list_response->num_rows > 0) {
+              $rand = rand();
+              $_SESSION['rand'] = $rand;
+              while ($row = $attendee_list_response->fetch_array()) {
+                echo "
+        <form method='post' action=''>
+        <input type='hidden' value='$rand' name='randcheck' />
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email Address</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        if ($attendee_list_response->num_rows > 0) {
-          $rand = rand();
-          $_SESSION['rand'] = $rand;
-          while ($row = $attendee_list_response->fetch_array()) {
-            echo "
-    <form method='post' action=''>
-    <input type='hidden' value='$rand' name='randcheck' />
-    <tr>
-      <td scope='col'>" . $row[0] . "<input type='hidden' value='" . $row['accountId'] . "' name='accountId' /></td>
-      <td scope='col'>" . $row["firstName"] . "</td>
-      <td scope='col'>" . $row["lastName"] . "</td>
-      <td scope='col'>" . $row['emailAddress'] . "</td>";
-            if ($row["accountEventStatus"] == 'Approved') {
-              echo "<td scope='col' style='color: green;'><i class='fa-solid fa-check'></i> Approved</td>";
-            } else {
-              echo "<td scope='col'><button name='hireBtn' class='btn btn-main2' type='submit'>Hire</button></td>";
+          <td scope='col'>" . $row[0] . "<input type='hidden' value='" . $row['accountId'] . "' name='accountId' /></td>
+          <td scope='col'>" . $row["firstName"] . "</td>
+          <td scope='col'>" . $row["lastName"] . "</td>
+          <td scope='col'>" . $row['emailAddress'] . "</td>";
+                if ($row["accountEventStatus"] == 'Approved') {
+                  echo "<td scope='col' style='color: green;'><i class='fa-solid fa-check'></i> Approved</td>";
+                } else {
+                  echo "<td scope='col'><button name='hireBtn' class='btn btn-main2' type='submit'>Approve</button></td>";
+                }
+                echo "</tr></form>";
+              }
             }
-            echo "</tr></form>";
-          }
-        }
-        ?>
-      </tbody>
-    </table>
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button name='backBtn' class='backbtn' onclick="handleOnClick(<?php echo $eventId; ?>);"> <i class="fa-solid fa-circle-arrow-left"></i> <span>Back</span></button>
+
   </div>
 </body>
 

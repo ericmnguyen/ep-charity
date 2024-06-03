@@ -112,12 +112,7 @@ li {
   margin-right: 10px;
   box-shadow: 0px 1px 1px 0px #0c649f !important;
 }
-form small {
-  display: none;
-  float: left;
-  color: rgb(255, 58, 58);
-  padding: 0 5px;
-}
+
 .form-control,
 .form-select {
   border-radius: 0px;
@@ -236,6 +231,9 @@ form small {
 }
 .mainnav .collapse .upper .search-bar-nav button {
   margin-left: -43px;
+}
+.mainnav .collapse .upper .search-bar-nav button i {
+  background: #fff;
 }
 .mainnav .collapse .upper .user-nav-btn {
   margin-left: 40px;
@@ -495,6 +493,12 @@ form small {
 }
 .sign-body .sign-container .container-box .card-box .card-body form .form-group .form-control.error {
   border: 1px solid rgb(255, 58, 58);
+}
+.sign-body .sign-container .container-box .card-box .card-body form small {
+  display: none;
+  float: left;
+  color: rgb(255, 58, 58);
+  padding: 0 5px;
 }
 .sign-body .sign-container .container-box .card-box .card-body form .login-btn {
   padding: 8px 20px 7px;
@@ -941,6 +945,12 @@ form small {
 }
 .profile-container .profile-content .btn-add:active .fa {
   background: #1082ce;
+}
+.profile-container .profile-content form small {
+  display: none;
+  float: left;
+  color: rgb(255, 58, 58);
+  padding: 0 5px;
 }
 .profile-container .profile-content .address-table .address-row {
   border-radius: 5px;
@@ -1642,4 +1652,48 @@ form small {
   color: #fff;
   cursor: pointer;
   transform: scale(1.01);
+}
+
+#PageNotFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+}
+#PageNotFound .error {
+  text-align: center;
+  width: 500px;
+  margin: auto;
+}
+#PageNotFound .error .emotion {
+  margin-bottom: 0.75rem;
+}
+#PageNotFound .error .emotion svg {
+  height: 90px;
+  width: 90px;
+}
+#PageNotFound .error h1 {
+  margin-top: 0;
+}
+#PageNotFound .error p {
+  font-size: 20px;
+}
+#PageNotFound .error .go-back {
+  display: block;
+  margin-top: 3rem;
+}
+#PageNotFound .error .go-back .button {
+  text-decoration: none;
+  background-color: #1082ce;
+  color: #fbfbfb;
+  padding: 0.75rem 2rem;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px -1 rgba(0, 0, 0, 0.08);
+}
+#PageNotFound .error .go-back .button svg {
+  height: 17px;
+  width: 17px;
+  vertical-align: middle;
+  margin-right: 0.5em;
 }

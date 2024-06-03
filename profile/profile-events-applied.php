@@ -58,20 +58,21 @@
 
 
                                               <div class="col-12">
-                                                  <div class="event-list-content">
+                                                  <div class="event-list-content p-3">
                                                       <ul class="">
-                                                          <li><i class="fas fa-map-marker-alt"></i> <?php echo $row['address']; ?></li>
-                                                          <li><i class="far fa-clock"></i> <?php echo $row['startDate'] ?> ,
+                                                          <li class="mb-2"><i class="fas fa-map-marker-alt"></i> <?php echo $row['address']; ?></li>
+                                                          <li class="mb-2"><i class="far fa-clock"></i> <?php echo $row['startDate'] ?> ,
                                                               <?php
                                                                 $startTimeAMPM = date("g:i A", strtotime($row['startDate'] . ' ' . $row['startTime']));
                                                                 $endTimeAMPM = date("g:i A", strtotime($row['endDate'] . ' ' . $row['endTime']));
                                                                 echo $startTimeAMPM . ' - ' . $endTimeAMPM;
                                                                 ?></li>
                                                       </ul>
-                                                      <h2><?php echo $row['eventName']; ?></h2>
-                                                      <p><?php echo $row['description']; ?></p>
+                                                      <h2 class="mb-2"><?php echo $row['eventName']; ?></h2>
+                                                      <p class="mb-1"><?php echo $row['description']; ?></p>
                                                       <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                                                   </div>
+
                                               </div>
 
 

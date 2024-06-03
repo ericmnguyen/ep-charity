@@ -17,38 +17,40 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <?php
 include('inc_config.php');
-$searchText = $_GET['searchText'];
-if (isset($_GET['searchBtn']) && $_SERVER["REQUEST_METHOD"] == "GET") {
-    header("Location: $root_directory/events/event-list.php?searchText=" . $searchText);
-	exit();
+if (isset($_POST['searchBtn']) && $_SERVER["REQUEST_METHOD"] == "POST") {
+    $searchText = $_GET['searchText'];
+    if (isset($_GET['searchBtn']) && $_SERVER["REQUEST_METHOD"] == "GET") {
+        header("Location: $root_directory/events/event-list.php?searchText=" . $searchText);
+        exit();
+    }
 }
 ?>
 
 <div class="topbar">
     <div class="container-fluid">
         <div class="social">
-            <a href="<?php echo $root_directory; ?>"><i class="fab fa-instagram-square"></i></a>
-            <a href="<?php echo $root_directory; ?>"><i class="fab fa-facebook-square"></i></a>
-            <a href="<?php echo $root_directory; ?>"><i class="fab fa-twitter-square"></i></a>
+            <a href="www.instagram.com"><i class="fab fa-instagram-square"></i></a>
+            <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+            <a href="www.twitter.com"><i class="fab fa-twitter-square"></i></a>
         </div>
 
-        <div class="offer">
-            <!-- <a href="./"> New Events</a> -->
-
-            <a href="">1:company and 2:Volunter................</a>
-
+        <!-- <div class="offer">
             <?php
             if (isset($_SESSION['roleId'])) {
-                echo '<a>Welcome, accountId : ' . htmlspecialchars($_SESSION['accountId']) . ", roleId :" . htmlspecialchars($_SESSION['roleId']) . '</a>';
+               if($_SESSION['roleId'] == 1){
+                    echo '<a>Welcome, Company rep!</a>';
+                }else{
+                   echo '<a>Welcome, Volunteer!</a>';
+               }
             } else {
                 echo '<a>Welcome, Guest!</a>';
             }
             ?>
-        </div>
+        </div> -->
 
         <div class="help">
-            <a href="<?php echo $root_directory; ?>">Blog</a>
-            <a href="<?php echo $root_directory; ?>">Need Help?</a>
+            <a href="<?php echo $root_directory; ?>/soon.php">Blog</a>
+            <a href="<?php echo $root_directory; ?>/soon.php">Need Help?</a>
         </div>
     </div>
 </div>
@@ -72,15 +74,15 @@ if (isset($_GET['searchBtn']) && $_SERVER["REQUEST_METHOD"] == "GET") {
                     <?php
                     if (isset($_SESSION['roleId'])) {
                         if ($_SESSION['roleId'] == 1) { //company
-                            echo '<a href="' . $root_directory . '/company/company-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/company/company-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa-solid fa-user-tie"></i> </a>';
                             echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
                         if ($_SESSION['roleId'] == 2) { //volunteer
-                            echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa fa-user"> </i> </a>';
+                            echo '<a href="' . $root_directory . '/profile/profile-edit.php" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $_SESSION['emailAddress'] . '"><i class="fa-solid fa-circle-user"></i> </a>';
                             echo '<a href="' . $root_directory . '/signout.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>';
                         }
                     } else {
-                        echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in"><i class="fa fa-user"><span>!</span> </i> </a>';
+                        echo '<a href="' . $root_directory . '/signin.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign in"><i class="fa-solid fa-user"><span>!</span> </i> </a>';
                     }
 
                     // Debugging: Output session information

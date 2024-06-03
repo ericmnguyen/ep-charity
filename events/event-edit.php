@@ -153,7 +153,6 @@ $mysqli->close();
                 <div class="form-floating">
                     <select class="form-select" id="eventStatus" name="eventStatus" aria-label="eventStatus">
                         <option value="Published" <?php if ($eventStatus == 'Published') echo 'selected'; ?>>Published</option>
-                        <option value="Ongoing" <?php if ($eventStatus == 'Ongoing') echo 'selected'; ?>>Ongoing</option>
                         <option value="Finished" <?php if ($eventStatus == 'Finished') echo 'selected'; ?>>Finished</option>
                     </select>
                     <label for="eventStatus">Event Status</label>

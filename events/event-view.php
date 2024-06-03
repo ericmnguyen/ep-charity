@@ -464,7 +464,7 @@ if (!isset($_GET['eventId'])) {
                                 }
                             }
                             $comment_list_query = "SELECT Review.*, Account.firstName, Account.lastName 
-                            FROM ep_charity.Review, Account
+                            FROM Review, Account
                             WHERE eventId=$eventId AND Account.accountId = Review.accountId";
                             $comment_list_response = $mysqli->query($comment_list_query);
                             if (!$comment_list_response) {

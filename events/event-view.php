@@ -168,7 +168,7 @@ if (!isset($_GET['eventId'])) {
 
 
     <div class="event-banner">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13259.592462159666!2d150.9984115508324!3d-33.81494224218676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a318e167af4f%3A0x5017d681632c600!2sParramatta%20NSW%202150!5e0!3m2!1sen!2sau!4v1715585024195!5m2!1sen!2sau" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6630.213710646691!2d151.02199854752567!3d-33.809555447211835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a372fe3b5985%3A0xfc6609c5a7c9cce8!2sWSU%20Parking!5e0!3m2!1sen!2sau!4v1717408869506!5m2!1sen!2sau" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
 
@@ -364,7 +364,7 @@ if (!isset($_GET['eventId'])) {
                                                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?eventId=' . $eventId; ?>">
                                                     <div class="modal-body">
 
-                                                        <div>Do you want to apply for this event?  <br>
+                                                        <div>Do you want to apply for this event? <br>
                                                             Please click Confirm to be added to the Volunteer list for this event</div>
                                                         <input type="hidden" name="eventId" value="<?php echo $eventId ?>">
                                                         <input type="hidden" name="accountId" value=" <?php echo $_SESSION['accountId'] ?>">
@@ -380,11 +380,9 @@ if (!isset($_GET['eventId'])) {
                                     </div>
                                 <?php
                                 }
-                            } 
-                            elseif (isset($_SESSION['accountId']) == $accountId) {
+                            } elseif ($_SESSION['accountId'] == $accountId) {
                                 // handle event host
-                                echo "<a class='btn btn-main2' href='./applicants.php?eventId=".$eventId."'>See applicant list</a>";
-
+                                echo "<a class='btn btn-main2' href='./applicants.php?eventId=" . $eventId . "'>See applicant list</a>";
                             } elseif (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 1)) {
                                 // handle other commpany
                                 ?>
@@ -403,11 +401,6 @@ if (!isset($_GET['eventId'])) {
                             <?php
                             }
                             ?>
-
-
-
-
-
 
                         </div>
                     </div>
@@ -485,7 +478,7 @@ if (!isset($_GET['eventId'])) {
                                                 <sub>" . $row["createdAt"] . "</sub>
 
                                                 <div>";
-                                            // TODO: add date
+                                    // TODO: add date
                                     // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
                                     if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button

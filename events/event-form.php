@@ -123,7 +123,6 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
                 <div class="form-floating">
                     <select class="form-select" id="eventStatus" name="eventStatus" aria-label="eventStatus">
                         <option value="Published">Published</option>
-                        <option value="Ongoing">Ongoing</option>
                         <option value="Finished">Finished</option>
                     </select>
                     <label for="eventStatus">Location Type</label>

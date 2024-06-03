@@ -82,7 +82,7 @@ if (isset($_SESSION['roleId']) != 2) {
 		if (!$update_staff_response) {
 			die(mysqli_connect_error());
 		}
-		echo "<h3 class='text-success'>Updated successfully.</h3>";
+		echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> Updated successfully <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 	}
 	?>
 

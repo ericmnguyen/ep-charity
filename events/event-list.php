@@ -99,8 +99,10 @@ session_start();
                                         echo $startTimeAMPM . ' - ' . $endTimeAMPM;
                                         ?></li>
                                 </ul>
-                                <h2><?php echo $row['eventName']; ?></h2>
+                                <h2><?php echo $row['eventName']; ?>
+                                </h2>
                                 <p><?php echo $row['description']; ?></p>
+                                <small><i class="fa-solid fa-building-ngo"></i> <?php echo $row['companyName']; ?></small>
                                 <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                             </div>
                         </div>

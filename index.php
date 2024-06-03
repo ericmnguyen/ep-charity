@@ -68,7 +68,7 @@
                     <?php
                     require_once './conn.php';
 
-                    $sql = "SELECT * FROM Event";
+                    $sql = "SELECT * FROM Event,Company WHERE Event.accountId = Company.accountId";
                     $result = mysqli_query($mysqli, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -87,6 +87,7 @@
                                     </ul>
                                     <h2><?php echo $row['eventName']; ?></h2>
                                     <p><?php echo $row['description']; ?></p>
+                                    <small><i class="fa-solid fa-building-ngo"></i> <?php echo $row['companyName']; ?></small>
                                     <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                                 </div>
                             </div>

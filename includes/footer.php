@@ -50,14 +50,14 @@
                  </h3>
                  <ul>
                      <li>
-                         <a href="" title="New Events">
+                         <a href="<?php echo $root_directory; ?>/events/event-list.php" title="New Events">
                              <span>
                                  New Events
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Ongoing Events">
+                         <a href="<?php echo $root_directory; ?>/events/event-list.php" title="Ongoing Events">
                              <span>
                                  Voted Best Events
                              </span>
@@ -65,7 +65,7 @@
                      </li>
 
                      <li>
-                         <a href="" title="Weekly Best Volunteer">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Weekly Best Volunteer">
                              <span>
                                  Voted Top Volunteer
                              </span>
@@ -88,14 +88,14 @@
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Help Center">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Help Center">
                              <span>
                                  Help Center
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Contact Us">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Contact Us">
                              <span>
                                  Contact Us
                              </span>
@@ -111,35 +111,35 @@
                  </h3>
                  <ul>
                      <li>
-                         <a href="<?php echo $root_directory; ?>/about.php" title="About Us">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="About Us">
                              <span>
                                  About Us
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Customer Testimonials">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Customer Testimonials">
                              <span>
                                  Customer Testimonials
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Privacy Policy">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Privacy Policy">
                              <span>
                                  Privacy Policy
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Terms &amp; Conditions">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Terms &amp; Conditions">
                              <span>
                                  Terms &amp; Conditions
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Careers &amp; Jobs">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Careers &amp; Jobs">
                              <span>
                                  Careers &amp; Jobs
                              </span>
@@ -155,21 +155,21 @@
                  </h3>
                  <ul>
                      <li>
-                         <a href="" title="">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="">
                              <span>
                                  Advertise
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Affiliate Program">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Affiliate Program">
                              <span>
                                  Affiliate Program
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Referral Program">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Referral Program">
                              <span>
                                  Referral Program
                              </span>
@@ -185,21 +185,21 @@
                  </h3>
                  <ul>
                      <li>
-                         <a href="" title="Learning Center">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Learning Center">
                              <span>
                                  Learning Center
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="" title="Glossary of Terms">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Glossary of Terms">
                              <span>
                                  Glossary of Terms
                              </span>
                          </a>
                      </li>
                      <li>
-                         <a href="<?php echo $root_directory; ?>/blog.php" title="Blog">
+                         <a href="<?php echo $root_directory; ?>/soon.php" title="Blog">
                              <span>
                                  Blog
                              </span>

@@ -38,7 +38,7 @@ if (!isset($_GET['companyId']) || ($_GET['companyId'] == '')) {
 
                 $companyId = $_GET['companyId'];
 
-                $sql = "SELECT e.eventId, e.eventName, e.description, e.eventType, e.startDate, e.endDate, e.startTime, e.endTime, e.venueName, e.address, e.locationType, e.maxAttendees, e.createdAt, e.eventStatus, e.accountId, c.companyId FROM Event e INNER JOIN Account a ON e.accountId = a.accountId INNER JOIN Company c ON a.accountId = c.accountId WHERE c.companyId = $companyId ORDER BY e.startDate";
+                $sql = "SELECT e.eventId, e.eventName, e.description, e.eventType, e.startDate, e.endDate, e.startTime, e.endTime, e.venueName, e.address, e.locationType, e.maxAttendees, e.createdAt, e.eventStatus, e.accountId, c.companyId, c.companyName FROM Event e INNER JOIN Account a ON e.accountId = a.accountId INNER JOIN Company c ON a.accountId = c.accountId WHERE c.companyId = $companyId ORDER BY e.startDate";
 
                 $result = mysqli_query($mysqli, $sql);
 
@@ -58,6 +58,7 @@ if (!isset($_GET['companyId']) || ($_GET['companyId'] == '')) {
                                 </ul>
                                 <h2><?php echo $row['eventName']; ?></h2>
                                 <p><?php echo $row['description']; ?></p>
+                                <small><i class="fa-solid fa-building-ngo"></i> <?php echo $row['companyName']; ?></small>
                                 <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                             </div>
                         </div>

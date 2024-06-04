@@ -38,10 +38,9 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
         $address = $mysqli->real_escape_string($_POST['address']);
         $locationType = $mysqli->real_escape_string($_POST['locationType']);
         $maxAttendees = $mysqli->real_escape_string($_POST['maxAttendees']);
-        $eventStatus = $mysqli->real_escape_string($_POST['eventStatus']);
         $accountId = $_SESSION['accountId'];
 
-        $sql = "INSERT INTO Event (eventName, description, eventType, startDate, endDate, startTime, endTime, venueName, address, locationType, maxAttendees, eventStatus, accountId) VALUES ('$eventName', '$description', '$eventType', '$startDate', '$endDate', '$startTime', '$endTime', '$venueName', '$address', '$locationType', '$maxAttendees', '$eventStatus', '$accountId')";
+        $sql = "INSERT INTO Event (eventName, description, eventType, startDate, endDate, startTime, endTime, venueName, address, locationType, maxAttendees, eventStatus, accountId) VALUES ('$eventName', '$description', '$eventType', '$startDate', '$endDate', '$startTime', '$endTime', '$venueName', '$address', '$locationType', '$maxAttendees', 'Published', '$accountId')";
 
         if ($mysqli->query($sql) === TRUE) {
             $_SESSION['success_message'] = "Event Created.";
@@ -119,13 +118,6 @@ if (!isset($_SESSION['roleId']) || ($_SESSION['roleId'] != 1)) {
                 <div class="form-floating">
                     <input class="form-control" id="maxAttendees" name="maxAttendees" type="number" placeholder="Max Attendees" data-sb-validations="required" />
                     <label for="maxAttendees">Max Attendees</label>
-                </div>
-                <div class="form-floating">
-                    <select class="form-select" id="eventStatus" name="eventStatus" aria-label="eventStatus">
-                        <option value="Published">Published</option>
-                        <option value="Finished">Finished</option>
-                    </select>
-                    <label for="eventStatus">Location Type</label>
                 </div>
                 <div class="d-flex flex-wrap ps-1">
                     <button class="btn btn-main2" id="submitButton" type="submit">Submit</button>

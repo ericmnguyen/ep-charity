@@ -83,7 +83,7 @@ if (isset($_SESSION['roleId'])) {
 				if (!$insert_staff_response) {
 					die(mysqli_connect_error());
 				} else {
-					echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> Company added <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
+					echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> Volunteer created <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
 				}
 			}
 		}

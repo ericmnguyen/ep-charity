@@ -29,7 +29,7 @@
                               <!-- edit account -->
 
                               <div class="content-title">
-                                  <h2>Past Events</h2>
+                                  <h2>Events</h2>
                                   <h4>Past Events</h4>
                               </div>
 

@@ -43,9 +43,11 @@ include('../config.php');
 
   // Handle get applicant list
   $attendee_list_query = "SELECT Account.accountId, Account.emailAddress, Account.firstName, Account.lastName, Account.contactNumber,
-                        AccountEvent.*
-                        FROM AccountEvent, Account
-                        WHERE AccountEvent.accountId = Account.accountId AND AccountEvent.eventId = $eventId";
+                        AccountEvent.*, Staff.skills
+                        FROM AccountEvent
+                        JOIN Account ON AccountEvent.accountId = Account.accountId
+                        JOIN Staff ON Account.accountId = Staff.accountId
+                        WHERE AccountEvent.eventId = $eventId";
   $attendee_list_response = mysqli_query($mysqli, $attendee_list_query);
 
   if (!$attendee_list_response) {
@@ -63,6 +65,7 @@ include('../config.php');
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Email Address</th>
+              <th scope="col">Skills</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
@@ -79,7 +82,8 @@ include('../config.php');
           <td scope='col'>" . $row[0] . "<input type='hidden' value='" . $row['accountId'] . "' name='accountId' /></td>
           <td scope='col'>" . $row["firstName"] . "</td>
           <td scope='col'>" . $row["lastName"] . "</td>
-          <td scope='col'>" . $row['emailAddress'] . "</td>";
+          <td scope='col'>" . $row['emailAddress'] . "</td>
+          <td scope='col'>" . $row['skills'] . "</td>";
                 if ($row["accountEventStatus"] == 'Approved') {
                   echo "<td scope='col' style='color: green;'><i class='fa-solid fa-check'></i> Approved</td>";
                 } else {

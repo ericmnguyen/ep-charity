@@ -26,6 +26,11 @@
                       <i class="fa fa-cubes"></i>
                       Applied Events </a>
               </li>
+              <li class="nav-item">
+                  <a href="<?php echo $root_directory; ?>/profile/profile-events-active.php" class="nav-link ">
+                      <i class="fa fa-cubes"></i>
+                      Active Events </a>
+              </li>
 
               <li class="nav-title">
                   <h2>Reviews</h2>

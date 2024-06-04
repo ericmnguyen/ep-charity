@@ -30,9 +30,8 @@
 
                               <div class="content-title">
                                   <h2>Events</h2>
-                                  <h4>Past Events</h4>
+                                  <h4>Active Events</h4>
                               </div>
-
 
                               <div class="event row">
                                   <?php
@@ -43,8 +42,7 @@
 
                                         $accountId = mysqli_real_escape_string($mysqli, $_SESSION['accountId']);
 
-                                        // $sql = "SELECT event.* FROM accountevent JOIN event ON accountevent.eventId = event.eventId WHERE accountevent.accountId = $accountId AND accountevent.accountEventStatus = 'Applied'  AND event.eventStatus = 'Finished'";
-                                        $sql = "SELECT Event.* FROM AccountEvent JOIN Event ON AccountEvent.eventId = Event.eventId WHERE AccountEvent.accountId = $accountId AND AccountEvent.accountEventStatus = 'Approved' AND Event.eventStatus = 'Finished'";
+                                        $sql = "SELECT Event.* FROM AccountEvent JOIN Event ON AccountEvent.eventId = Event.eventId WHERE AccountEvent.accountId = $accountId AND AccountEvent.accountEventStatus = 'Approved' AND Event.eventStatus = 'Published'";
 
                                         $result = mysqli_query($mysqli, $sql);
 
@@ -69,6 +67,7 @@
                                                       <p class="mb-1"><?php echo $row['description']; ?></p>
                                                       <a href="<?php echo $root_directory; ?>/events/event-view.php?eventId=<?php echo $row['eventId']; ?>" class="btn btn-main">See Event</a>
                                                   </div>
+
                                               </div>
 
 

@@ -426,8 +426,8 @@ if (!isset($_GET['eventId'])) {
                                 }
                             }
                         }
-                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
-                            // TODO: only allows volunteers who joined this event to comment
+                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2) && $accountEventStatus == 'Approved' || $accountId == $_SESSION['accountId']) {
+                            // only allows volunteers who joined this event to comment
                         ?>
                             <form action="" method="post">
                                 <?php

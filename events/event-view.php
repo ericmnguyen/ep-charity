@@ -30,6 +30,8 @@ if (!isset($_GET['eventId'])) {
 
     include '../conn.php';
 
+    include '../includes/alert.php';
+
     $eventId = $_GET['eventId'];
     $sqlEvent = "SELECT * FROM Event WHERE eventId = '$eventId'";
     $resultEvent = mysqli_query($mysqli, $sqlEvent);
@@ -149,15 +151,14 @@ if (!isset($_GET['eventId'])) {
         // Execute statement
         if ($stmt->execute() === TRUE) {
             $_SESSION['success_message'] = "You have been added to the event. Please check your profile for more information";
-            echo "Record inserted successfully";
+            echo '<div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Nice!</strong> You have been added to the event. Please check your profile for more information <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
             echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply  . ' ' . $_GET['eventId'] . ', Account ID: ' . $accountIdApply . '");</script>';
-            // header("Location: $currentURL");
-            header("Location: $root_directory/events/event-list.php");
+            header("Location: $root_directory/events/event-view.php?eventId=$eventId");
         } else {
-            $_SESSION['error_message'] = "asdasd Not Created.";
-            // echo "Error: " . $sql . "<br>" . $mysqli->error;
+            $_SESSION['error_message'] = "Someting went wrong. Please try again..";
+            echo '<div class="alert alert-error alert-dismissible fade show mx-3 mt-3" role="alert"><strong>Opps!</strong> Someting went wrong. Please try again. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>';
+            header("Location: $root_directory/events/event-view.php?eventId=$eventId");
             // echo '<script>alert("Form submitted. Event ID: ' . $eventIdApply . ', Account ID: ' . $accountIdApply . '");</script>';
-            header("Location: $root_directory/events/event-list.php");
         }
 
         // Close statement
@@ -351,7 +352,7 @@ if (!isset($_GET['eventId'])) {
                                     <div class="d-grid mb-4">
                                         <button class="btn btn-main2" type="button" href="" data-bs-toggle="modal" data-bs-target="#applyModal">
                                             Apply Now
-                                        </buton>
+                                            </buton>
                                     </div>
 
                                     <div class="modal" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
@@ -425,8 +426,8 @@ if (!isset($_GET['eventId'])) {
                                 }
                             }
                         }
-                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2) && $accountEventStatus == 'Approved') {
-                            // only allows volunteers who joined this event to comment
+                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
+                            // TODO: only allows volunteers who joined this event to comment
                         ?>
                             <form action="" method="post">
                                 <?php
@@ -475,9 +476,11 @@ if (!isset($_GET['eventId'])) {
                                                 <input type='hidden' name='deleteComment' value=" . $row["reviewId"] . " />
                                                 <h5 class='card-title'>" . $row["firstName"] . " " . $row["lastName"] . "</h5>
                                                 <p class='card-text'>" . $row["message"] . "</p>
-                                                <sub>" . $row["createdAt"] . "</sub>
-
+                                                <sub>" . date("Y-m-d", strtotime($row['createdAt'])) . "</sub>
+                                                <sub>" . date("g:i A", strtotime($row['createdAt'])) . "</sub>
                                                 <div>";
+                                    // TODO: add date
+                                    // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
                                     if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button
                                         echo "<button type='submit' class='btn btn-sm btn-danger mt-3 pt-2'><i class='fa fa-trash'></i></button>";

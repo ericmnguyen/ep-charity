@@ -425,8 +425,8 @@ if (!isset($_GET['eventId'])) {
                                 }
                             }
                         }
-                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2)) {
-                            // TODO: only allows volunteers who joined this event to comment
+                        if (isset($_SESSION['roleId']) && ($_SESSION['roleId'] == 2) && $accountEventStatus == 'Approved') {
+                            // only allows volunteers who joined this event to comment
                         ?>
                             <form action="" method="post">
                                 <?php
@@ -478,8 +478,6 @@ if (!isset($_GET['eventId'])) {
                                                 <sub>" . $row["createdAt"] . "</sub>
 
                                                 <div>";
-                                    // TODO: add date
-                                    // if ($_SESSION["accountId"] == $row["accountId"] || $_SESSION['roleId'] == 1) {
                                     if ($_SESSION["accountId"] == $row["accountId"]) {
                                         // handle show remove button
                                         echo "<button type='submit' class='btn btn-sm btn-danger mt-3 pt-2'><i class='fa fa-trash'></i></button>";

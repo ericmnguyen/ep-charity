@@ -1,9 +1,9 @@
 START TRANSACTION;
 -- DROP DATABASE IF EXISTS ep_charity;
 -- Create the database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS db_22074118;
+CREATE DATABASE IF NOT EXISTS ep_charity;
 
-USE db_22074118;
+USE ep_charity;
 --
 -- CREATE TABLES
 --
